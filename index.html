@@ -4,41 +4,47 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Undergrad Circle | Simra</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* 1. CSS VARIABLES */
+    /* 1. CSS VARIABLES & RESET */
     :root { --bg-color: #050914; --accent-color: #3b82f6; --glass-bg: rgba(22, 27, 34, 0.6); --glass-border: rgba(255, 255, 255, 0.08); --text-main: #ffffff; --text-muted: #8b949e; }
-    
-    /* GLOBAL SETTINGS */
     body { background-color: var(--bg-color); font-family: 'Inter', sans-serif; color: var(--text-main); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 0; overflow-x: hidden; }
     
-    /* BACKGROUND */
+    /* ANIMATIONS */
     .background-orb { position: fixed; top: -10%; left: 50%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0,0,0,0) 70%); transform: translateX(-50%); z-index: -1; animation: pulse 10s infinite alternate; }
     @keyframes pulse { 0% { opacity: 0.5; transform: translateX(-50%) scale(1); } 100% { opacity: 0.8; transform: translateX(-50%) scale(1.2); } }
 
-    /* HEADER */
-    h1 { font-size: 4rem; font-weight: 800; margin: 30px 0 10px 0; background: linear-gradient(135deg, #ffffff 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
-    .subtitle { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; text-align: center; }
+    /* LAYOUT */
+    .main-content { display: flex; flex-direction: column; align-items: center; justify-content: center; flex-grow: 1; width: 100%; max-width: 1200px; padding: 40px 20px; }
+    h1 { font-size: 4rem; font-weight: 800; margin: 0 0 15px 0; background: linear-gradient(135deg, #ffffff 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
+    .subtitle { font-size: 1.2rem; color: var(--text-muted); text-align: center; margin-bottom: 50px; }
 
     /* SEARCH BAR */
-    .search-wrapper { position: relative; width: 100%; max-width: 580px; margin-bottom: 50px; }
-    .search-bar { width: 100%; padding: 20px 60px; border-radius: 20px; border: 1px solid var(--glass-border); background-color: var(--glass-bg); color: white; font-size: 17px; outline: none; box-sizing: border-box; }
+    .search-wrapper { position: relative; width: 100%; max-width: 580px; margin-bottom: 60px; z-index: 10; }
+    .search-bar { width: 100%; padding: 20px 55px; border-radius: 20px; border: 1px solid var(--glass-border); background-color: var(--glass-bg); backdrop-filter: blur(20px); color: var(--text-main); font-size: 17px; outline: none; box-sizing: border-box; }
     .search-bar:focus { border-color: var(--accent-color); }
     
-    /* DROPDOWN (Quick Access) */
-    .dropdown { display: none; position: absolute; top: 110%; left: 0; width: 100%; background: #0d1117; border: 1px solid var(--glass-border); border-radius: 16px; padding: 10px; z-index: 100; }
+    /* DROPDOWN */
+    .dropdown { display: none; position: absolute; top: 110%; left: 0; width: 100%; background-color: #0d1117; border: 1px solid var(--glass-border); border-radius: 16px; padding: 10px; box-sizing: border-box; }
     .search-wrapper:focus-within .dropdown { display: block; }
-    .dropdown-item { display: block; padding: 12px; color: #c9d1d9; text-decoration: none; border-radius: 8px; }
-    .dropdown-item:hover { background: rgba(59, 130, 246, 0.1); color: var(--accent-color); }
+    .dropdown-item { display: block; padding: 12px 15px; color: #c9d1d9; text-decoration: none; border-radius: 10px; font-size: 15px; }
+    .dropdown-item:hover { background-color: rgba(59, 130, 246, 0.1); color: var(--accent-color); }
 
-    /* CARDS */
-    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; width: 100%; max-width: 800px; padding: 20px; }
-    .card { background: rgba(22, 27, 34, 0.7); border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px; text-decoration: none; color: white; transition: transform 0.3s; display: block; }
-    .card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
-    .card h3 { margin-top: 0; color: #fff; }
-    .card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
-    .card.hidden { display: none; } /* Used by Javascript */
+    /* GRID & CARDS */
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; width: 100%; max-width: 800px; }
+    .card { background: rgba(22, 27, 34, 0.7); border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px; text-decoration: none; color: white; transition: transform 0.3s; display: flex; flex-direction: column; }
+    .card:hover { transform: translateY(-6px); border-color: var(--accent-color); }
+    .card h3 { margin: 0 0 10px 0; font-size: 19px; }
+    .card p { margin: 0; font-size: 14px; color: var(--text-muted); line-height: 1.6; }
+    .card-icon { margin-bottom: 20px; width: 48px; height: 48px; background: rgba(255,255,255,0.05); border-radius: 12px; display: flex; align-items: center; justify-content: center; }
+    .card-icon svg { fill: #fff; width: 24px; height: 24px; }
+    
+    /* UTILITY FOR SEARCH */
+    .hidden { display: none !important; }
 
     /* FOOTER */
     .site-footer { margin-top: auto; padding: 40px; text-align: center; color: var(--text-muted); border-top: 1px solid var(--glass-border); width: 100%; }
@@ -48,61 +54,75 @@
 
   <div class="background-orb"></div>
 
-  <h1>The Undergrad Circle</h1>
-  <div class="subtitle">Curated opportunities by Simra Faisal</div>
-
-  <div class="search-wrapper">
-    <input type="text" id="searchInput" class="search-bar" placeholder="Search opportunities (e.g., Internships)..." autocomplete="off">
+  <div class="main-content">
     
-    <div class="dropdown">
-      <div style="padding:10px; font-size:11px; color:#8b949e; font-weight:700;">QUICK ACCESS</div>
-      <a href="scholarships.html" class="dropdown-item">Scholarships</a>
-      <a href="research.html" class="dropdown-item">Research Programs</a>
-      <a href="certificates.html" class="dropdown-item">Certificates</a>
-      <a href="internships.html" class="dropdown-item">Internships</a>
+    <div class="header-container">
+      <h1>The Undergrad Circle</h1>
+      <div class="subtitle">Curated opportunities by Simra Faisal</div>
     </div>
-  </div>
 
-  <div class="grid-container">
-    
-    <a href="scholarships.html" class="card">
-      <h3>Undergraduate Scholarships</h3>
-      <p>Comprehensive guides on eligibility, requirements, and application processes for funding.</p>
-    </a>
-    
-    <a href="research.html" class="card">
-      <h3>Research Programs</h3>
-      <p>Fully funded opportunities covering airfare, accommodation, and stipend.</p>
-    </a>
+    <div class="search-wrapper">
+      <input type="text" id="searchInput" class="search-bar" placeholder="Search opportunities..." autocomplete="off">
+      
+      <div class="dropdown">
+        <div style="padding:10px 15px; font-size:11px; color:#8b949e; font-weight:700;">QUICK ACCESS</div>
+        
+        <a href="scholarships.html" class="dropdown-item">Scholarships</a>
+        
+        <a href="research.html" class="dropdown-item">Research Programs</a>
+        
+        <a href="certificates.html" class="dropdown-item">Certifications</a>
+        
+        <a href="internships.html" class="dropdown-item">Internships</a>
+      </div>
+    </div>
 
-    <a href="certificates.html" class="card">
-      <h3>Certifications</h3>
-      <p>Top-tier professional certifications available at no cost to students.</p>
-    </a>
+    <div class="grid-container" id="cardsGrid">
+      
+      <a href="scholarships.html" class="card searchable-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg></div>
+        <h3>Undergraduate Scholarships</h3>
+        <p>Comprehensive guides on eligibility, requirements, and application processes.</p>
+      </a>
+      
+      <a href="research.html" class="card searchable-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M6 22h12a2 2 0 0 0 2-2l-1-6.05V9a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v4.95L4 20a2 2 0 0 0 2 2zm10-12v4.26l.78 4.74H7.22l.78-4.74V10h8zM8 4h8v2H8z"/></svg></div>
+        <h3>Research Programs</h3>
+        <p>Fully funded opportunities covering airfare, accommodation, and stipend.</p>
+      </a>
 
-    <a href="internships.html" class="card">
-      <h3>Internships</h3>
-      <p>Global internships and professional career pathways for undergraduates.</p>
-    </a>
+      <a href="certificates.html" class="card searchable-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M12 2C7.03 2 3 6.03 3 11c0 4.97 4.03 9 9 9s9-4.03 9-9c0-4.97-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg></div>
+        <h3>Certifications</h3>
+        <p>Top-tier professional certifications available at no cost to students.</p>
+      </a>
+
+      <a href="internships.html" class="card searchable-card">
+        <div class="card-icon"><svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg></div>
+        <h3>Internships</h3>
+        <p>Global internships and professional career pathways for undergraduates.</p>
+      </a>
+
+    </div>
 
   </div>
 
   <footer class="site-footer">
-    &copy; 2026 The Undergrad Circle | Simra Faisal
+    &copy; 2026 The Undergrad Circle
   </footer>
 
   <script>
     const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.card');
+    const cards = document.querySelectorAll('.searchable-card');
 
-    searchInput.addEventListener('keyup', (e) => {
+    searchInput.addEventListener('keyup', function(e) {
       const term = e.target.value.toLowerCase();
 
       cards.forEach(card => {
-        const title = card.querySelector('h3').innerText.toLowerCase();
-        const text = card.querySelector('p').innerText.toLowerCase();
-
-        if (title.includes(term) || text.includes(term)) {
+        const title = card.querySelector('h3').textContent.toLowerCase();
+        const desc = card.querySelector('p').textContent.toLowerCase();
+        
+        if (title.includes(term) || desc.includes(term)) {
           card.classList.remove('hidden');
         } else {
           card.classList.add('hidden');
