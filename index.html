@@ -4,507 +4,112 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>The Undergrad Circle | Simra</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
     /* 1. CSS VARIABLES */
-    :root {
-      --bg-color: #050914;
-      --accent-color: #3b82f6; /* Bright Blue */
-      --glass-bg: rgba(22, 27, 34, 0.6);
-      --glass-border: rgba(255, 255, 255, 0.08);
-      --text-main: #ffffff;
-      --text-muted: #8b949e;
-      --glow-color: rgba(59, 130, 246, 0.5);
-    }
-
-    /* 2. REPLIT BADGE REMOVER */
-    .replit-ui-badge, .replit-badge {
-      display: none !important;
-    }
-
-    /* 3. GLOBAL SETTINGS */
-    body {
-      background-color: var(--bg-color);
-      font-family: 'Inter', sans-serif;
-      color: var(--text-main);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      position: relative;
-      overflow-x: hidden;
-    }
-
-    /* Ambient Background Animation */
-    .background-orb {
-      position: fixed;
-      top: -10%;
-      left: 50%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0,0,0,0) 70%);
-      transform: translateX(-50%);
-      z-index: -1;
-      pointer-events: none;
-      animation: pulse 10s infinite alternate;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 0.5; transform: translateX(-50%) scale(1); }
-      100% { opacity: 0.8; transform: translateX(-50%) scale(1.2); }
-    }
-
-    /* 4. TOP CONTACT BAR */
-    .top-bar {
-      width: 100%;
-      display: flex;
-      justify-content: flex-end;
-      padding: 20px 40px;
-      box-sizing: border-box;
-      z-index: 100;
-    }
-
-    .contact-container {
-      display: flex;
-      gap: 12px;
-    }
-
-    .contact-btn {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      background-color: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--glass-border);
-      padding: 10px 16px;
-      border-radius: 50px;
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 13px;
-      font-weight: 600;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
-    }
-
-    .contact-btn:hover {
-      background-color: rgba(59, 130, 246, 0.2);
-      border-color: var(--accent-color);
-      transform: translateY(-2px);
-    }
-
-    .contact-btn svg {
-      width: 16px; 
-      height: 16px;
-      fill: var(--text-main);
-    }
-
-    /* 5. MAIN CONTENT WRAPPER */
-    .main-content {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      flex-grow: 1; /* Pushes footer down */
-      width: 100%;
-      max-width: 1200px;
-      padding: 40px 20px;
-      box-sizing: border-box;
-    }
-
-    /* 6. TITLES */
-    .header-container {
-      text-align: center;
-      margin-bottom: 50px;
-      animation: fadeInDown 0.8s ease-out;
-    }
-
-    /* --- FIXED H1 HERE --- */
-    h1 {
-      font-size: 4rem;
-      font-weight: 800;
-      margin: 0 0 15px 0;
-      letter-spacing: -2px;
-      background: linear-gradient(135deg, #ffffff 0%, #3b82f6 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      /* Changed line-height and added padding to fix the 'g' clipping */
-      line-height: 1.25; 
-      padding-bottom: 10px;
-    }
-
-    .subtitle {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      font-weight: 400;
-      letter-spacing: 0.5px;
-    }
-
-    /* 7. SEARCH WRAPPER */
-    .search-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 580px;
-      margin-bottom: 60px;
-      z-index: 10;
-      animation: fadeInUp 0.8s ease-out 0.2s backwards;
-    }
-
-    .search-bar {
-      width: 100%;
-      padding: 20px 110px 20px 55px; 
-      border-radius: 20px;
-      border: 1px solid var(--glass-border);
-      background-color: var(--glass-bg);
-      backdrop-filter: blur(20px);
-      color: var(--text-main);
-      font-size: 17px;
-      font-family: inherit;
-      outline: none;
-      box-shadow: 0 4px 30px rgba(0,0,0,0.3);
-      box-sizing: border-box;
-      transition: all 0.3s ease;
-    }
-
-    .search-bar:focus {
-      background-color: rgba(22, 27, 34, 0.9);
-      border-color: var(--accent-color);
-      box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.2), 0 0 30px rgba(59, 130, 246, 0.1);
-    }
-
-    /* Icons */
-    .search-icon-svg {
-      fill: var(--text-muted);
-      width: 22px;
-      height: 22px;
-      transition: fill 0.2s;
-    }
-
-    .icon-left {
-      position: absolute;
-      left: 22px;
-      top: 50%;
-      transform: translateY(-50%);
-      pointer-events: none;
-    }
-
-    .icons-right {
-      position: absolute;
-      right: 22px;
-      top: 50%;
-      transform: translateY(-50%);
-      display: flex;
-      gap: 15px;
-      align-items: center;
-      cursor: pointer;
-    }
-
-    .icons-right .search-icon-svg:hover {
-      fill: #ffffff;
-    }
-
-    /* 8. DROPDOWN */
-    .dropdown {
-      opacity: 0;
-      visibility: hidden;
-      position: absolute;
-      top: 115%; 
-      left: 0;
-      width: 100%;
-      background-color: #0d1117;
-      border: 1px solid var(--glass-border);
-      border-radius: 16px;
-      box-shadow: 0 20px 50px rgba(0,0,0,0.7);
-      padding: 10px;
-      transform: translateY(-10px);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
-      box-sizing: border-box;
-    }
-
-    .search-wrapper:focus-within .dropdown {
-      opacity: 1;
-      visibility: visible;
-      transform: translateY(0);
-      top: 110%;
-    }
-
-    .dropdown-header {
-      padding: 10px 15px;
-      font-size: 11px;
-      color: var(--text-muted);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-    }
-
-    .dropdown-item {
-      display: flex;
-      align-items: center;
-      padding: 12px 15px;
-      color: #c9d1d9;
-      text-decoration: none;
-      border-radius: 10px;
-      transition: background 0.2s;
-      font-size: 15px;
-    }
-
-    .dropdown-item:hover {
-      background-color: rgba(59, 130, 246, 0.1);
-      color: var(--accent-color);
-    }
-
-    .dropdown-item svg {
-      width: 18px;
-      height: 18px;
-      margin-right: 15px;
-      fill: var(--text-muted);
-    }
+    :root { --bg-color: #050914; --accent-color: #3b82f6; --glass-bg: rgba(22, 27, 34, 0.6); --glass-border: rgba(255, 255, 255, 0.08); --text-main: #ffffff; --text-muted: #8b949e; }
     
-    .dropdown-item:hover svg {
-      fill: var(--accent-color);
-    }
-
-    /* 9. CARDS GRID */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-      width: 100%;
-      max-width: 800px;
-      animation: fadeInUp 0.8s ease-out 0.4s backwards;
-    }
-
-    .card {
-      background: linear-gradient(145deg, rgba(22, 27, 34, 0.7), rgba(13, 17, 23, 0.5));
-      border: 1px solid var(--glass-border);
-      padding: 30px;
-      border-radius: 20px;
-      text-align: left;
-      text-decoration: none;
-      color: white;
-      transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: radial-gradient(800px circle at var(--mouse-x, 0) var(--mouse-y, 0), rgba(255, 255, 255, 0.06), transparent 40%);
-      opacity: 0;
-      transition: opacity 0.5s;
-    }
-
-    .card:hover {
-      transform: translateY(-6px);
-      border-color: rgba(59, 130, 246, 0.5);
-      box-shadow: 0 15px 40px rgba(0,0,0,0.4);
-    }
-
-    .card h3 { 
-      margin: 0 0 10px 0; 
-      font-size: 19px; 
-      font-weight: 700;
-    }
-
-    .card p { 
-      margin: 0; 
-      font-size: 14px; 
-      color: var(--text-muted); 
-      line-height: 1.6;
-    }
-
-    .card-icon {
-      margin-bottom: 20px;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      transition: background 0.3s;
-    }
-
-    .card-icon svg {
-      fill: #fff;
-      width: 24px;
-      height: 24px;
-    }
+    /* GLOBAL SETTINGS */
+    body { background-color: var(--bg-color); font-family: 'Inter', sans-serif; color: var(--text-main); display: flex; flex-direction: column; align-items: center; min-height: 100vh; margin: 0; padding: 0; overflow-x: hidden; }
     
-    .card:hover .card-icon {
-      background: var(--accent-color);
-    }
+    /* BACKGROUND */
+    .background-orb { position: fixed; top: -10%; left: 50%; width: 600px; height: 600px; background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(0,0,0,0) 70%); transform: translateX(-50%); z-index: -1; animation: pulse 10s infinite alternate; }
+    @keyframes pulse { 0% { opacity: 0.5; transform: translateX(-50%) scale(1); } 100% { opacity: 0.8; transform: translateX(-50%) scale(1.2); } }
 
-    /* 10. FOOTER */
-    .site-footer {
-      margin-top: auto;
-      width: 100%;
-      padding: 40px 20px;
-      text-align: center;
-      border-top: 1px solid var(--glass-border);
-      background: rgba(5, 9, 20, 0.8);
-      backdrop-filter: blur(10px);
-    }
+    /* HEADER */
+    h1 { font-size: 4rem; font-weight: 800; margin: 30px 0 10px 0; background: linear-gradient(135deg, #ffffff 0%, #3b82f6 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-align: center; }
+    .subtitle { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 40px; text-align: center; }
 
-    .footer-content {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      color: var(--text-muted);
-      font-size: 14px;
-    }
+    /* SEARCH BAR */
+    .search-wrapper { position: relative; width: 100%; max-width: 580px; margin-bottom: 50px; }
+    .search-bar { width: 100%; padding: 20px 60px; border-radius: 20px; border: 1px solid var(--glass-border); background-color: var(--glass-bg); color: white; font-size: 17px; outline: none; box-sizing: border-box; }
+    .search-bar:focus { border-color: var(--accent-color); }
     
-    .footer-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .footer-link:hover {
-      color: var(--accent-color);
-    }
+    /* DROPDOWN (Quick Access) */
+    .dropdown { display: none; position: absolute; top: 110%; left: 0; width: 100%; background: #0d1117; border: 1px solid var(--glass-border); border-radius: 16px; padding: 10px; z-index: 100; }
+    .search-wrapper:focus-within .dropdown { display: block; }
+    .dropdown-item { display: block; padding: 12px; color: #c9d1d9; text-decoration: none; border-radius: 8px; }
+    .dropdown-item:hover { background: rgba(59, 130, 246, 0.1); color: var(--accent-color); }
 
-    /* ANIMATIONS */
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(30px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
+    /* CARDS */
+    .grid-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 25px; width: 100%; max-width: 800px; padding: 20px; }
+    .card { background: rgba(22, 27, 34, 0.7); border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px; text-decoration: none; color: white; transition: transform 0.3s; display: block; }
+    .card:hover { transform: translateY(-5px); border-color: var(--accent-color); }
+    .card h3 { margin-top: 0; color: #fff; }
+    .card p { color: var(--text-muted); font-size: 14px; line-height: 1.5; }
+    .card.hidden { display: none; } /* Used by Javascript */
 
-    /* MOBILE TWEAKS */
-    @media (max-width: 600px) {
-      .top-bar { padding: 15px 20px; justify-content: center; }
-      h1 { font-size: 2.5rem; }
-      .search-bar { padding-right: 80px; }
-      .grid-container { grid-template-columns: 1fr; }
-      .contact-btn span { font-size: 12px; }
-    }
-
+    /* FOOTER */
+    .site-footer { margin-top: auto; padding: 40px; text-align: center; color: var(--text-muted); border-top: 1px solid var(--glass-border); width: 100%; }
   </style>
 </head>
 <body>
 
   <div class="background-orb"></div>
 
-  <div class="top-bar">
-    <div class="contact-container">
-      
-      <a href="tel:+393927489325" class="contact-btn">
-        <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 1.25 0 2.45.2 3.57.57.35.13.46.52.24 1.02l-2.2 2.2z"/></svg>
-        <span>+39 392 748 9325</span>
-      </a>
+  <h1>The Undergrad Circle</h1>
+  <div class="subtitle">Curated opportunities by Simra Faisal</div>
 
-      <a href="mailto:simrafaisal1111@gmail.com" class="contact-btn">
-        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-        <span>Email Me</span>
-      </a>
-
+  <div class="search-wrapper">
+    <input type="text" id="searchInput" class="search-bar" placeholder="Search opportunities (e.g., Internships)..." autocomplete="off">
+    
+    <div class="dropdown">
+      <div style="padding:10px; font-size:11px; color:#8b949e; font-weight:700;">QUICK ACCESS</div>
+      <a href="scholarships.html" class="dropdown-item">Scholarships</a>
+      <a href="research.html" class="dropdown-item">Research Programs</a>
+      <a href="certificates.html" class="dropdown-item">Certificates</a>
+      <a href="internships.html" class="dropdown-item">Internships</a>
     </div>
   </div>
 
-  <div class="main-content">
+  <div class="grid-container">
     
-    <div class="header-container">
-      <h1>The Undergrad Circle</h1>
-      <div class="subtitle">Curated opportunities by Simra Faisal</div>
-    </div>
+    <a href="scholarships.html" class="card">
+      <h3>Undergraduate Scholarships</h3>
+      <p>Comprehensive guides on eligibility, requirements, and application processes for funding.</p>
+    </a>
+    
+    <a href="research.html" class="card">
+      <h3>Research Programs</h3>
+      <p>Fully funded opportunities covering airfare, accommodation, and stipend.</p>
+    </a>
 
-    <div class="search-wrapper">
-      
-      <div class="icon-left">
-        <svg class="search-icon-svg" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
-      </div>
+    <a href="certificates.html" class="card">
+      <h3>Certifications</h3>
+      <p>Top-tier professional certifications available at no cost to students.</p>
+    </a>
 
-      <input type="text" class="search-bar" placeholder="Search opportunities..." autocomplete="off">
-
-      <div class="icons-right">
-        <svg class="search-icon-svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
-        <svg class="search-icon-svg" viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3z"/><path d="M17 11c0 2.76-2.24 5-5 5s-5-2.24-5-5H5c0 3.53 2.61 6.43 6 6.92V21h2v-3.08c3.39-.49 6-3.39 6-6.92h-2z"/></svg>
-      </div>
-
-      <div class="dropdown">
-        <div class="dropdown-header">Quick Access</div>
-        
-        <a href="https://notion.so/YOUR_LINK_HERE" target="_blank" class="dropdown-item">
-          <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
-          <span>Scholarships</span>
-        </a>
-
-        <a href="https://notion.so/YOUR_LINK_HERE" target="_blank" class="dropdown-item">
-          <svg viewBox="0 0 24 24"><path d="M6 22h12a2 2 0 0 0 2-2l-1-6.05V9a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v4.95L4 20a2 2 0 0 0 2 2zm10-12v4.26l.78 4.74H7.22l.78-4.74V10h8zM8 4h8v2H8z"/></svg>
-          <span>Research Programs</span>
-        </a>
-
-        <a href="https://notion.so/YOUR_LINK_HERE" target="_blank" class="dropdown-item">
-           <svg viewBox="0 0 24 24"><path d="M12 2C7.03 2 3 6.03 3 11c0 4.97 4.03 9 9 9s9-4.03 9-9c0-4.97-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg>
-          <span>Certifications</span>
-        </a>
-        
-        <a href="https://notion.so/YOUR_LINK_HERE" target="_blank" class="dropdown-item">
-          <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
-          <span>Internships</span>
-        </a>
-      </div>
-    </div>
-
-    <div class="grid-container">
-      <a href="https://notion.so/YOUR_LINK_HERE" target="_blank" class="card">
-        <div class="card-icon">
-           <svg viewBox="0 0 24 24"><path d="M12 3L1 9l11 6 9-4.91V17h2V9L12 3zM5 13.18v4L12 21l7-3.82v-4L12 17l-7-3.82z"/></svg>
-        </div>
-        <h3>Undergraduate Scholarships</h3>
-        <p>Comprehensive guides on eligibility, requirements, and application processes.</p>
-      </a>
-      
-      <a href="https://notion.so/YOUR_LINK_HERE" target="_blank" class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M6 22h12a2 2 0 0 0 2-2l-1-6.05V9a1 1 0 0 0-1-1H6a1 1 0 0 0-1 1v4.95L4 20a2 2 0 0 0 2 2zm10-12v4.26l.78 4.74H7.22l.78-4.74V10h8zM8 4h8v2H8z"/></svg>
-        </div>
-        <h3>Research Programs</h3>
-        <p>Fully funded opportunities covering airfare, accommodation, and stipend.</p>
-      </a>
-
-      <a href="https://notion.so/YOUR_LINK_HERE" target="_blank" class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M12 2C7.03 2 3 6.03 3 11c0 4.97 4.03 9 9 9s9-4.03 9-9c0-4.97-4.03-9-9-9zm0 16c-3.86 0-7-3.14-7-7s3.14-7 7-7 7 3.14 7 7-3.14 7-7 7zm0-12c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5z"/></svg>
-        </div>
-        <h3>Certifications</h3>
-        <p>Top-tier professional certifications available at no cost to students.</p>
-      </a>
-
-      <a href="https://notion.so/YOUR_LINK_HERE" target="_blank" class="card">
-        <div class="card-icon">
-          <svg viewBox="0 0 24 24"><path d="M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"/></svg>
-        </div>
-        <h3>Internships</h3>
-        <p>Global internships and professional career pathways for undergraduates.</p>
-      </a>
-    </div>
+    <a href="internships.html" class="card">
+      <h3>Internships</h3>
+      <p>Global internships and professional career pathways for undergraduates.</p>
+    </a>
 
   </div>
 
   <footer class="site-footer">
-    <div class="footer-content">
-      <div>&copy; 2026 The Undergrad Circle</div>
-      <div>
-        <a href="mailto:simrafaisal1111@gmail.com" class="footer-link">simrafaisal1111@gmail.com</a>
-        &nbsp;|&nbsp; 
-        <a href="tel:+393927489325" class="footer-link">+39 392 748 9325</a>
-      </div>
-    </div>
+    &copy; 2026 The Undergrad Circle | Simra Faisal
   </footer>
+
+  <script>
+    const searchInput = document.getElementById('searchInput');
+    const cards = document.querySelectorAll('.card');
+
+    searchInput.addEventListener('keyup', (e) => {
+      const term = e.target.value.toLowerCase();
+
+      cards.forEach(card => {
+        const title = card.querySelector('h3').innerText.toLowerCase();
+        const text = card.querySelector('p').innerText.toLowerCase();
+
+        if (title.includes(term) || text.includes(term)) {
+          card.classList.remove('hidden');
+        } else {
+          card.classList.add('hidden');
+        }
+      });
+    });
+  </script>
 
 </body>
 </html>
