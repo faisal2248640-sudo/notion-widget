@@ -11,21 +11,21 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <style>
-    /* --- 1. PREMIUM SAAS COLOR PALETTE --- */
+    /* --- 1. PREMIUM SAAS COLOR PALETTE (Dark Blue/Purple Vibe) --- */
     :root {
-      --bg-dark: #000000;        /* True Black */
-      --bg-card: #09090b;       /* Zinc 950 */
-      --card-border: rgba(255, 255, 255, 0.08); 
-      --card-border-hover: rgba(255, 255, 255, 0.2);
-      --accent-main: #ededed;    /* Off-white for stark contrast */
-      --accent-glow: rgba(255, 255, 255, 0.1);
-      --text-main: #f8fafc;
-      --text-muted: #a1a1aa;     /* Zinc 400 */
+      --bg-dark: #0a0e27;        /* Very dark blue base */
+      --bg-card: rgba(16, 24, 60, 0.6); /* Translucent dark blue for cards */
+      --card-border: rgba(255, 255, 255, 0.1); 
+      --card-border-hover: rgba(255, 255, 255, 0.25);
+      --accent-main: #ffffff;    /* White for primary buttons */
+      --accent-highlight: #b6adff; /* Light purple for text highlight */
+      --text-main: #ffffff;
+      --text-muted: #cbd5e1;     /* Slate 300 */
       --nav-height: 70px;
-      --brand-bg: #0f172a; /* Dark blue background for brand section */
+      --brand-bg: #0d111d;       /* Almost black/dark navy for the bottom footer */
     }
 
-    /* --- 2. BASE RESET & MESH BACKGROUND --- */
+    /* --- 2. BASE RESET & GRADIENT BACKGROUND --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -34,9 +34,8 @@
 
     body {
       background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04), transparent 50%),
-        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02), transparent 50%);
+      /* Radial gradient matching the uploaded image */
+      background-image: radial-gradient(circle at center 30%, #2f3688 0%, #161c4d 50%, #0a0e27 100%);
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-main);
       min-height: 100vh;
@@ -54,10 +53,10 @@
       position: fixed;
       top: 0;
       z-index: 1000;
-      background: rgba(0, 0, 0, 0.5);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      border-bottom: 1px solid var(--card-border);
+      background: rgba(10, 14, 39, 0.3);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
     .nav-container {
@@ -81,7 +80,7 @@
     }
 
     .nav-logo span {
-        color: var(--text-muted);
+      color: var(--accent-highlight);
     }
 
     .nav-actions {
@@ -105,10 +104,10 @@
 
     /* --- 4. BUTTONS --- */
     .btn {
-      padding: 10px 20px;
-      border-radius: 999px;
-      font-size: 0.875rem;
-      font-weight: 500;
+      padding: 12px 24px;
+      border-radius: 8px; /* Slightly squared like the image */
+      font-size: 0.9rem;
+      font-weight: 600;
       text-decoration: none;
       transition: all 0.2s ease;
       display: inline-flex;
@@ -119,28 +118,28 @@
 
     .btn-primary {
       background: var(--accent-main);
-      color: #000;
+      color: #000000;
     }
 
     .btn-primary:hover {
-      background: #fff;
-      transform: scale(1.02);
+      background: #e2e8f0;
+      transform: translateY(-2px);
     }
 
     .btn-outline {
-      background: transparent;
+      background: rgba(255, 255, 255, 0.1);
       color: var(--text-main);
-      border: 1px solid var(--card-border);
+      border: 1px solid rgba(255, 255, 255, 0.2);
     }
 
     .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.05);
-      border-color: var(--card-border-hover);
+      background: rgba(255, 255, 255, 0.15);
+      border-color: rgba(255, 255, 255, 0.4);
     }
 
     /* --- 5. HERO SECTION --- */
     .main-content {
-      padding-top: calc(var(--nav-height) + 100px);
+      padding-top: calc(var(--nav-height) + 80px);
       max-width: 1100px;
       margin: 0 auto;
       padding-left: 24px;
@@ -162,33 +161,32 @@
       gap: 8px;
       padding: 6px 16px;
       border-radius: 999px;
-      border: 1px solid var(--card-border);
-      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      background: rgba(255, 255, 255, 0.05);
       font-size: 0.8rem;
       font-weight: 500;
-      color: var(--text-muted);
+      color: var(--text-main);
       margin-bottom: 24px;
-    }
-
-    .hero-badge i {
-      color: #fff;
     }
 
     h1 {
-      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
       font-weight: 700;
-      letter-spacing: -0.05em;
-      line-height: 1;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
       margin-bottom: 24px;
-      background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+      color: var(--text-main);
+    }
+
+    /* Highlight class for the purple text */
+    .highlight-text {
+      color: var(--accent-highlight);
     }
 
     .subtitle {
       color: var(--text-muted);
-      font-size: 1.125rem;
-      max-width: 580px;
+      font-size: 1.1rem;
+      max-width: 600px;
       margin: 0 auto 40px;
       line-height: 1.6;
     }
@@ -204,11 +202,12 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 24px;
-      margin-bottom: 100px;
+      margin-bottom: 80px;
     }
 
     .card {
       background: var(--bg-card);
+      backdrop-filter: blur(10px);
       border: 1px solid var(--card-border);
       border-radius: 16px;
       padding: 32px;
@@ -219,29 +218,30 @@
 
     .card:hover {
       border-color: var(--card-border-hover);
-      background: rgba(255, 255, 255, 0.02);
+      background: rgba(255, 255, 255, 0.05);
+      transform: translateY(-4px);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
 
     .card-icon {
-      height: 40px;
-      width: 40px;
-      border-radius: 10px;
-      background: rgba(255, 255, 255, 0.05);
+      height: 48px;
+      width: 48px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
       border: 1px solid var(--card-border);
       display: flex;
       align-items: center;
       justify-content: center;
       margin-bottom: 20px;
-      color: #fff;
-      font-size: 1.25rem;
+      color: var(--accent-highlight);
+      font-size: 1.5rem;
     }
 
     .card h3 { 
       color: #fff; 
       margin: 0 0 12px 0; 
-      font-size: 1.125rem; 
+      font-size: 1.25rem; 
       font-weight: 600;
-      letter-spacing: -0.02em;
     }
 
     .card p { 
@@ -250,50 +250,55 @@
       line-height: 1.6; 
     }
 
-    /* --- NEW BRAND SECTION --- */
-    .brand-section {
-        background-color: var(--brand-bg);
-        padding: 40px 0;
-        text-align: center;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 12px;
-        color: var(--text-main);
+    /* --- 7. NEW BOTTOM BRAND SECTION --- */
+    .bottom-brand-wrapper {
+      background-color: var(--brand-bg);
+      width: 100%;
+      margin-top: auto;
+      border-top: 1px solid rgba(255,255,255,0.05);
     }
 
-    .brand-section i {
-        font-size: 2rem;
-        color: var(--text-main);
+    .brand-bar {
+      padding: 40px 0;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      color: var(--text-main);
     }
 
-    .brand-section span {
-        font-size: 1.5rem;
-        font-weight: 700;
+    .brand-bar i {
+      font-size: 2rem;
+      color: #7cb3ff; /* A nice tech-blue for the logo icon */
     }
 
-    /* --- 7. FOOTER --- */
+    .brand-bar span {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.5px;
+    }
+
     footer {
-      padding: 40px 24px;
-      border-top: 1px solid var(--card-border);
+      padding: 20px 24px 40px;
       text-align: center;
       display: flex;
       flex-direction: column;
       align-items: center;
       gap: 8px;
+      background-color: var(--brand-bg);
     }
 
     .footer-email {
-      color: var(--text-main);
+      color: var(--text-muted);
       text-decoration: none;
       font-size: 0.875rem;
       transition: color 0.2s;
     }
 
     .footer-email:hover {
-      color: var(--text-muted);
+      color: var(--text-main);
     }
-
   </style>
 </head>
 <body>
@@ -307,7 +312,7 @@
           <a href="#">Research</a>
           <a href="#">Pricing</a>
         </div>
-        <a href="signin.html" class="btn btn-primary">Sign In</a>
+        <a href="signin.html" class="btn btn-outline" style="padding: 8px 16px;">Sign In</a>
       </div>
     </div>
   </nav>
@@ -317,15 +322,15 @@
       <div class="hero-badge">
         <i class="ri-sparkling-line"></i> Introducing AI Matcher v2.0
       </div>
-      <h1>Global Research <br>Made Simple.</h1>
-      <p class="subtitle">Join the circle of elite undergraduates accessing world-class scholarships, labs, and research stipends.</p>
+      <h1>Global Research <br>Made <span class="highlight-text">Simple?</span></h1>
+      <p class="subtitle">Join hundreds of elite undergraduates using UC to validate and secure world-class scholarships and research stipends.</p>
       
       <div class="hero-cta">
         <a href="dashboard.html" class="btn btn-primary">
-          Start Exploring
+          <i class="ri-flashlight-line"></i> Start Exploring →
         </a>
         <a href="#features" class="btn btn-outline">
-          <i class="ri-search-line"></i> Browse Opportunities
+          View Opportunities
         </a>
       </div>
     </header>
@@ -349,14 +354,16 @@
     </div>
   </div>
 
-  <div class="brand-section">
-    <i class="ri-circle-fill"></i> <span>Undergrad Circle</span>
-  </div>
+  <div class="bottom-brand-wrapper">
+    <div class="brand-bar">
+      <i class="ri-node-tree"></i> <span>Undergrad Circle</span>
+    </div>
 
-  <footer>
-    <p style="color: var(--text-muted); font-size: 0.875rem;">© 2026 The Undergrad Circle. Built by Simra Faisal.</p>
-    <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
-  </footer>
+    <footer>
+      <p style="color: rgba(255,255,255,0.4); font-size: 0.875rem;">© 2026 The Undergrad Circle. Built by Simra Faisal.</p>
+      <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
+    </footer>
+  </div>
 
 </body>
 </html>
