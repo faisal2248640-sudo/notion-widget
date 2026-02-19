@@ -11,28 +11,25 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <style>
-    /* --- 1. SIMULATR-INSPIRED COLOR PALETTE --- */
+    /* --- 1. CORE VARIABLES --- */
     :root {
-      --bg-dark: #020617;        /* Deep Navy */
-      --bg-card: #0f172a;       /* Slate Blue */
-      --card-border: rgba(56, 189, 248, 0.1); 
-      --accent-blue: #38bdf8;    /* Sky Blue */
-      --accent-glow: rgba(56, 189, 248, 0.4);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
+      --bg-color: #000000;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --card-border: rgba(255, 255, 255, 0.08);
+      --text-main: #ffffff;
+      --text-muted: #a1a1aa;
+      --accent-white: #ffffff;
       --nav-height: 80px;
+      --accent-purple: #a78bfa;
     }
 
     /* --- 2. BASE RESET --- */
     body {
-      background-color: var(--bg-dark);
-      background-image: 
-        radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent),
-        radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.05), transparent);
+      background-color: var(--bg-color);
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-main);
       margin: 0;
-      min-height: 100vh;
+      overflow-x: hidden;
     }
 
     /* --- 3. NAVIGATION --- */
@@ -45,7 +42,7 @@
       position: fixed;
       top: 0;
       z-index: 1000;
-      background: rgba(2, 6, 23, 0.8);
+      background: rgba(0, 0, 0, 0.8);
       backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border);
     }
@@ -63,54 +60,65 @@
       font-weight: 800;
       font-size: 1.4rem;
       letter-spacing: -1px;
-      color: var(--text-main);
+      background: linear-gradient(to right, #fff, #888);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
       text-decoration: none;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .nav-logo span {
-        color: var(--accent-blue);
     }
 
     .nav-actions {
       display: flex;
       gap: 12px;
+      align-items: center;
     }
 
+    /* PILL BUTTONS */
     .btn {
       padding: 10px 22px;
-      border-radius: 12px;
+      border-radius: 99px;
       font-size: 0.85rem;
       font-weight: 600;
       text-decoration: none;
-      transition: all 0.2s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
-    .btn-ghost {
+    .btn-home, .btn-dashboard {
       color: var(--text-muted);
     }
 
-    .btn-ghost:hover {
-      color: var(--accent-blue);
-      background: rgba(56, 189, 248, 0.05);
+    .btn-home:hover, .btn-dashboard:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.05);
     }
 
-    .btn-primary {
-      background: var(--accent-blue);
-      color: var(--bg-dark);
-      box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.3);
+    .btn-contact {
+      color: var(--text-main);
+      border: 1px solid rgba(255, 255, 255, 0.1);
     }
 
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px 0 rgba(56, 189, 248, 0.4);
+    .btn-contact:hover {
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .btn-signin {
+      background: var(--accent-white);
+      color: #000;
+      border: 1px solid var(--accent-white);
+    }
+
+    .btn-signin:hover {
+      background: transparent;
+      color: #fff;
+      box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
     }
 
     /* --- 4. HERO SECTION --- */
     .main-content {
-      padding-top: calc(var(--nav-height) + 80px);
+      padding-top: calc(var(--nav-height) + 100px);
       max-width: 1100px;
       margin: 0 auto;
       padding-left: 24px;
@@ -119,39 +127,45 @@
 
     header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 80px;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
+      font-size: clamp(3rem, 10vw, 5rem);
       font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
-      margin-bottom: 24px;
-      background: linear-gradient(to bottom, #fff 40%, var(--text-muted));
+      letter-spacing: -0.06em;
+      line-height: 0.9;
+      margin: 0 0 24px 0;
+      background: linear-gradient(180deg, #FFFFFF 0%, #71717a 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .subtitle {
       color: var(--text-muted);
-      font-size: 1.15rem;
-      max-width: 600px;
+      font-size: 1.2rem;
+      max-width: 500px;
       margin: 0 auto;
-      line-height: 1.6;
+      line-height: 1.5;
     }
 
-    /* --- 5. SEARCH (SaaS Style) --- */
+    /* --- 5. SEARCH --- */
     .search-wrapper {
-      background: var(--bg-card);
+      background: rgba(255, 255, 255, 0.02);
       border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 12px 20px;
+      border-radius: 18px;
+      padding: 18px 24px;
       display: flex;
       align-items: center;
-      max-width: 500px;
-      margin: 0 auto 80px;
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+      max-width: 540px;
+      margin: 0 auto 100px;
+      transition: all 0.3s ease;
+    }
+
+    .search-wrapper:focus-within {
+      border-color: rgba(255, 255, 255, 0.3);
+      background: rgba(255, 255, 255, 0.05);
+      box-shadow: 0 0 40px rgba(255, 255, 255, 0.03);
     }
 
     .search-input {
@@ -160,137 +174,187 @@
       color: #fff;
       outline: none;
       width: 100%;
-      margin-left: 12px;
-      font-size: 1rem;
+      margin-left: 14px;
+      font-size: 1.1rem;
     }
 
-    /* --- 6. CARDS (Glassmorphism) --- */
+    /* --- 6. CARDS --- */
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
     }
 
     .card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.3));
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 32px;
+      border-radius: 28px;
+      padding: 40px;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.4s ease;
+    }
+
+    .card:hover {
+      border-color: rgba(255, 255, 255, 0.25);
+      background: rgba(255, 255, 255, 0.06);
+      transform: translateY(-8px);
+    }
+
+    .card h3 { color: #fff; margin: 0 0 12px 0; font-size: 1.4rem; font-weight: 700; }
+    .card p { color: var(--text-muted); font-size: 1rem; line-height: 1.6; margin: 0; }
+
+    /* --- 7. CTA SECTION (SIMULATR STYLE) --- */
+    .cta-section {
+      background: radial-gradient(circle at center, #1e1b4b 0%, #000 100%);
+      padding: 100px 40px;
+      text-align: center;
+      margin-top: 100px;
+      border-radius: 40px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
       position: relative;
       overflow: hidden;
     }
 
-    .card::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent 70%);
-        opacity: 0;
-        transition: opacity 0.3s;
-    }
-
-    .card:hover {
-      border-color: var(--accent-blue);
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
-    }
-
-    .card:hover::before {
-        opacity: 1;
-    }
-
-    .card h3 { 
-      color: #fff; 
-      margin: 0 0 12px 0; 
-      font-size: 1.25rem; 
-      display: flex;
-      justify-content: space-between;
+    .badge {
+      display: inline-flex;
       align-items: center;
-    }
-    
-    .card h3::after {
-        content: "\eb8f"; /* Remix Icon arrow */
-        font-family: 'remixicon';
-        font-size: 1rem;
-        color: var(--accent-blue);
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.3s;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 6px 16px;
+      border-radius: 99px;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
     }
 
-    .card:hover h3::after {
-        opacity: 1;
-        transform: translateX(0);
+    .cta-title {
+      font-size: clamp(2rem, 6vw, 3.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin: 0 0 20px 0;
     }
 
-    .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+    .cta-title span { color: var(--accent-purple); }
 
-    /* --- 7. FOOTER --- */
+    .cta-subtitle {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 40px;
+      font-size: 1.1rem;
+    }
+
+    .cta-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .btn-cta-primary {
+      background: white;
+      color: black;
+    }
+
+    .btn-cta-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      color: white;
+      backdrop-filter: blur(10px);
+    }
+
+    /* --- 8. FOOTER --- */
     footer {
-      margin-top: 100px;
+      margin-top: 80px;
       padding: 60px 20px;
       border-top: 1px solid var(--card-border);
       text-align: center;
     }
 
     .footer-email {
-      color: var(--accent-blue);
+      display: block;
+      margin-top: 12px;
+      color: #fff;
       text-decoration: none;
       font-weight: 500;
+      font-size: 1rem;
+      opacity: 0.6;
+      transition: opacity 0.3s;
     }
 
-    .hidden { display: none !important; }
+    .footer-email:hover { opacity: 1; }
 
+    .hidden { display: none !important; }
   </style>
 </head>
 <body>
 
   <nav>
     <div class="nav-container">
-      <a href="index.html" class="nav-logo">UC<span>.</span></a>
+      <a href="index.html" class="nav-logo">UC</a>
       <div class="nav-actions">
-        <a href="index.html" class="btn btn-ghost">Home</a>
-        <a href="dashboard.html" class="btn btn-ghost">Dashboard</a>
-        <a href="signin.html" class="btn btn-primary">Sign In</a>
+        <a href="index.html" class="btn btn-home">Home</a>
+        <a href="dashboard.html" class="btn btn-dashboard">Dashboard</a>
+        <a href="mailto:undergradcircle@gmail.com" class="btn btn-contact">Contact Us</a>
+        <a href="signin.html" class="btn btn-signin">Sign In</a>
       </div>
     </div>
   </nav>
 
   <div class="main-content">
     <header>
-      <h1>Global Research <br>Made Simple.</h1>
-      <p class="subtitle">Join the circle of elite undergraduates accessing world-class scholarships and research stipends.</p>
+      <h1>The Undergrad Circle</h1>
+      <p class="subtitle">The elite gateway for undergraduate scholarships and global research opportunities.</p>
     </header>
 
     <div class="search-wrapper">
-      <i class="ri-search-2-line" style="color: var(--accent-blue); font-size: 1.2rem;"></i>
-      <input type="text" id="searchInput" class="search-input" placeholder="Search opportunities..." autocomplete="off">
+      <i class="ri-search-line" style="color: var(--text-muted); font-size: 1.2rem;"></i>
+      <input type="text" id="searchInput" class="search-input" placeholder="Find your next move..." autocomplete="off">
     </div>
 
     <div class="grid-container" id="cardsGrid">
       <a href="scholarships.html" class="card searchable-card">
         <h3>Scholarships</h3>
-        <p>Unlock fully-funded international programs and monthly stipends designed for high-achievers.</p>
+        <p>Browse fully-funded programs with stipends for international students.</p>
       </a>
       <a href="research.html" class="card searchable-card">
         <h3>Research Labs</h3>
-        <p>Direct access to Principal Investigators at Ivy League and global institutions for summer cycles.</p>
+        <p>Connect with PIs at top institutions for summer research cohorts.</p>
       </a>
       <a href="ai-check.html" class="card searchable-card">
         <h3>AI Matcher</h3>
-        <p>Our proprietary algorithm analyzes your CV against historical acceptance data for instant feedback.</p>
+        <p>Instant acceptance probability based on your current GPA and CV.</p>
       </a>
     </div>
 
+    <section class="cta-section">
+      <div class="badge">
+        <i class="ri-sparkling-fill"></i> Start Testing Today
+      </div>
+      <h2 class="cta-title">
+        Ready to Ship with <br /> <span>Confidence?</span>
+      </h2>
+      <p class="cta-subtitle">
+        Join hundreds of founders and designers who use Undergrad Circle to validate their paths before launch.
+      </p>
+      <div class="cta-buttons">
+        <a href="signin.html" class="btn btn-cta-primary">
+          <i class="ri-flashlight-line"></i> Start Your Analysis →
+        </a>
+        <a href="#" class="btn btn-cta-secondary">
+          View Pricing
+        </a>
+      </div>
+    </section>
+
     <footer>
-      <p style="color: var(--text-muted); margin-bottom: 8px;">Built by Simra Faisal</p>
+      <p style="color: var(--text-muted); margin: 0;">Designed by Simra Faisal</p>
       <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
     </footer>
   </div>
 
   <script>
+    // Simple Search Logic
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.searchable-card');
 
