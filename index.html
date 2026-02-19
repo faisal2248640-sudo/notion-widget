@@ -1,381 +1,525 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <title>The Undergrad Circle | Simra Faisal</title>
+
   
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
+
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
+
+
   <style>
+
     :root {
+
       --bg-dark: #020617;
-      --sidebar-bg: #0b0e14; /* Match image background */
+
       --bg-card: rgba(15, 23, 42, 0.6);
+
       --card-border: rgba(56, 189, 248, 0.1);
+
       --accent-blue: #38bdf8;
-      --accent-purple: #8b5cf6; /* Added for the sidebar accent */
+
       --text-main: #f8fafc;
+
       --text-muted: #94a3b8;
+
       --nav-height: 80px;
-      --sidebar-width: 260px; /* Width for the new sidebar */
+
     }
+
+
 
     /* --- 1. ANIMATED BACKGROUND --- */
+
     body {
+
       background-color: var(--bg-dark);
+
       font-family: 'Plus Jakarta Sans', sans-serif;
+
       color: var(--text-main);
+
       margin: 0;
+
       min-height: 100vh;
+
       overflow-x: hidden;
+
       position: relative;
+
     }
+
+
+
+    /* Floating Blobs */
 
     .bg-glow {
+
       position: fixed;
+
       top: 0; left: 0; right: 0; bottom: 0;
+
       z-index: -1;
+
       overflow: hidden;
+
     }
+
+
 
     .blob {
+
       position: absolute;
+
       width: 500px;
+
       height: 500px;
+
       background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
+
       border-radius: 50%;
+
       filter: blur(60px);
+
       animation: drift 20s infinite alternate ease-in-out;
+
     }
+
+
 
     .blob-1 { top: -10%; left: -10%; animation-duration: 25s; }
+
     .blob-2 { bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(29, 78, 216, 0.1) 0%, transparent 70%); }
 
+
+
     @keyframes drift {
+
       from { transform: translate(0, 0) scale(1); }
+
       to { transform: translate(100px, 50px) scale(1.1); }
+
     }
 
-    /* --- SIDEBAR --- */
-    .sidebar {
-      width: var(--sidebar-width);
-      background: var(--sidebar-bg);
-      height: 100vh;
-      position: fixed;
-      left: 0;
-      top: 0;
-      display: flex;
-      flex-direction: column;
-      padding: 40px 0;
-      border-right: 1px solid rgba(255,255,255,0.05);
-      z-index: 1100;
-    }
 
-    .sidebar-logo {
-      padding: 0 32px 48px;
-      font-weight: 800;
-      font-size: 2rem;
-      letter-spacing: -1px;
-      color: #fff;
-      text-decoration: none;
-    }
-    .sidebar-logo span { color: var(--accent-purple); }
 
-    .side-nav {
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
+    /* --- 2. NAVIGATION --- */
 
-    .side-item {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      padding: 14px 32px;
-      text-decoration: none;
-      color: var(--text-muted);
-      font-weight: 500;
-      transition: all 0.3s;
-      position: relative;
-    }
-
-    .side-item i { font-size: 1.2rem; }
-
-    .side-item:hover { color: #fff; }
-
-    /* Active State matching image */
-    .side-item.active {
-      color: #fff;
-      background: linear-gradient(90deg, rgba(139, 92, 246, 0.15) 0%, transparent 100%);
-    }
-
-    .side-item.active::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 15%;
-      height: 70%;
-      width: 4px;
-      background: var(--accent-purple);
-      border-radius: 0 4px 4px 0;
-      box-shadow: 0 0 15px var(--accent-purple);
-    }
-
-    .sidebar-footer {
-      padding: 24px 0;
-      margin-top: auto;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    /* --- 2. NAVIGATION ADJUSTED --- */
     nav {
+
       height: var(--nav-height);
-      width: calc(100% - var(--sidebar-width)); /* Shrunk for sidebar */
+
+      width: 100%;
+
       display: flex;
+
       justify-content: center;
+
       position: fixed;
+
       top: 0;
-      right: 0; /* Align right */
+
       z-index: 1000;
+
       background: rgba(2, 6, 23, 0.7);
+
       backdrop-filter: blur(20px);
+
       border-bottom: 1px solid var(--card-border);
+
     }
+
+
 
     .nav-container {
+
       width: 100%;
+
       max-width: 1200px;
+
       padding: 0 40px;
+
       display: flex;
+
       justify-content: space-between;
+
       align-items: center;
+
     }
 
+
+
     .nav-logo {
+
       font-weight: 800;
+
       font-size: 1.4rem;
+
       letter-spacing: -1px;
+
       color: #fff;
+
       text-decoration: none;
+
     }
+
+
 
     .nav-logo span { color: var(--accent-blue); }
 
+
+
     .btn {
+
       padding: 10px 22px;
+
       border-radius: 12px;
+
       font-size: 0.85rem;
+
       font-weight: 600;
+
       text-decoration: none;
+
       transition: all 0.2s;
+
     }
+
+
 
     .btn-ghost { color: var(--text-muted); }
+
     .btn-ghost:hover { color: var(--accent-blue); background: rgba(56, 189, 248, 0.05); }
 
+
+
     .btn-primary {
+
       background: var(--accent-blue);
+
       color: var(--bg-dark);
+
       box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
+
     }
 
-    /* --- 3. HERO & SEARCH ADJUSTED --- */
+
+
+    /* --- 3. HERO & SEARCH --- */
+
     .main-content {
+
       padding-top: calc(var(--nav-height) + 100px);
+
       max-width: 1100px;
-      margin: 0 auto 0 calc(var(--sidebar-width) + 40px); /* Pushed content right */
+
+      margin: 0 auto;
+
       padding-left: 24px;
-      padding-right: 64px;
+
+      padding-right: 24px;
+
       position: relative;
+
     }
 
-    header { text-align: left; margin-bottom: 60px; } /* Set text left for dashboard feel */
+
+
+    header { text-align: center; margin-bottom: 60px; }
+
+
 
     h1 {
-      font-size: clamp(2.5rem, 6vw, 4rem);
+
+      font-size: clamp(2.5rem, 8vw, 4.5rem);
+
       font-weight: 800;
+
       letter-spacing: -0.04em;
-      line-height: 1.1;
+
+      line-height: 1;
+
       margin-bottom: 24px;
+
       background: linear-gradient(to bottom, #fff 50%, #64748b);
+
       -webkit-background-clip: text;
+
       -webkit-text-fill-color: transparent;
+
     }
 
+
+
     .search-wrapper {
+
       background: rgba(15, 23, 42, 0.8);
+
       border: 1px solid var(--card-border);
+
       border-radius: 16px;
+
       padding: 14px 24px;
+
       display: flex;
+
       align-items: center;
+
       max-width: 500px;
-      margin: 0 0 80px 0; /* Align left */
+
+      margin: 0 auto 80px;
+
       transition: border 0.3s;
+
     }
+
+
 
     .search-wrapper:focus-within { border-color: var(--accent-blue); }
 
+
+
     .search-input {
+
       background: transparent;
+
       border: none;
+
       color: #fff;
+
       outline: none;
+
       width: 100%;
+
       margin-left: 12px;
+
       font-size: 1rem;
+
     }
+
+
 
     /* --- 4. CARDS --- */
+
     .grid-container {
+
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+
       gap: 24px;
+
     }
+
+
 
     .card {
+
       background: var(--bg-card);
+
       border: 1px solid var(--card-border);
+
       border-radius: 24px;
+
       padding: 32px;
+
       text-decoration: none;
+
       transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+
       backdrop-filter: blur(10px);
+
     }
+
+
 
     .card:hover {
+
       border-color: rgba(56, 189, 248, 0.4);
+
       transform: translateY(-8px);
+
       background: rgba(30, 41, 59, 0.6);
+
       box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+
     }
+
+
 
     .card h3 { color: #fff; margin: 0 0 12px 0; font-size: 1.3rem; }
+
     .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
 
+
+
     /* --- 5. FOOTER --- */
+
     footer {
+
       margin-top: 120px;
-      padding: 60px 0;
-      text-align: left;
+
+      padding: 60px 20px;
+
+      text-align: center;
+
       border-top: 1px solid var(--card-border);
+
     }
+
+
 
     .footer-email { color: var(--accent-blue); text-decoration: none; font-weight: 500; }
 
+
+
     .hidden { display: none !important; }
 
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .sidebar { display: none; }
-      nav { width: 100%; }
-      .main-content { margin: 0 auto; padding: calc(var(--nav-height) + 40px) 24px; }
-      header { text-align: center; }
-      .search-wrapper { margin: 0 auto 60px; }
-    }
   </style>
+
 </head>
+
 <body>
 
+
+
   <div class="bg-glow">
+
     <div class="blob blob-1"></div>
+
     <div class="blob blob-2"></div>
+
   </div>
 
-  <aside class="sidebar">
-    <a href="#" class="sidebar-logo">UC<span>.</span></a>
-    
-    <nav class="side-nav">
-      <a href="#" class="side-item active">
-        <i class="ri-layout-grid-fill"></i>
-        <span>Overview</span>
-      </a>
-      <a href="scholarships.html" class="side-item">
-        <i class="ri-medal-line"></i>
-        <span>Scholarships</span>
-      </a>
-      <a href="research.html" class="side-item">
-        <i class="ri-flask-line"></i>
-        <span>Research</span>
-      </a>
-      <a href="#" class="side-item">
-        <i class="ri-calendar-line"></i>
-        <span>Calendar</span>
-      </a>
-      <a href="#" class="side-item">
-        <i class="ri-user-settings-line"></i>
-        <span>Profile</span>
-      </a>
-    </nav>
 
-    <div class="sidebar-footer">
-      <a href="#" class="side-item">
-        <i class="ri-logout-box-r-line"></i>
-        <span>Logout</span>
-      </a>
-    </div>
-  </aside>
 
   <nav>
+
     <div class="nav-container">
+
       <a href="index.html" class="nav-logo">UC<span>.</span></a>
+
       <div class="nav-actions">
+
         <a href="index.html" class="btn btn-ghost">Home</a>
+
         <a href="dashboard.html" class="btn btn-ghost">Dashboard</a>
+
         <a href="signin.html" class="btn btn-primary">Sign In</a>
+
       </div>
+
     </div>
+
   </nav>
 
+
+
   <div class="main-content">
+
     <header>
+
       <h1>Bridge to the <br>Academic Elite.</h1>
-      <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin-bottom: 0;">Curated scholarship pipelines and research opportunities for the next generation of global scholars.</p>
+
+      <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">Curated scholarship pipelines and research opportunities for the next generation of global scholars.</p>
+
     </header>
 
+
+
     <div class="search-wrapper">
+
       <i class="ri-search-2-line" style="color: var(--accent-blue);"></i>
+
       <input type="text" id="searchInput" class="search-input" placeholder="Search research cycles..." autocomplete="off">
+
     </div>
+
+
 
     <div class="grid-container" id="cardsGrid">
+
       <a href="scholarships.html" class="card searchable-card">
+
         <h3>Scholarships</h3>
+
         <p>Access high-stipend programs and fully-funded opportunities at global institutions.</p>
+
       </a>
+
       <a href="research.html" class="card searchable-card">
+
         <h3>Research Cohorts</h3>
+
         <p>Browse active PI listings looking for undergraduate summer research assistants.</p>
+
       </a>
+
       <a href="ai-check.html" class="card searchable-card">
+
         <h3>Success Matcher</h3>
+
         <p>Use our neural model to predict your admission chances based on profile metrics.</p>
+
       </a>
+
     </div>
 
+
+
     <footer>
+
       <p style="color: var(--text-muted); margin-bottom: 10px;">Created by Simra Faisal</p>
+
       <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
+
     </footer>
+
   </div>
 
+
+
   <script>
+
     const searchInput = document.getElementById('searchInput');
+
     const cards = document.querySelectorAll('.searchable-card');
 
+
+
     searchInput.addEventListener('input', (e) => {
+
       const term = e.target.value.toLowerCase();
+
       cards.forEach(card => {
+
         const text = card.innerText.toLowerCase();
+
         card.classList.toggle('hidden', !text.includes(term));
+
       });
+
     });
+
   </script>
 
+
+
 </body>
+
 </html>
