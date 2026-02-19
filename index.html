@@ -11,25 +11,31 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <style>
+    /* --- 1. SIMULATR-INSPIRED COLOR PALETTE --- */
     :root {
-      --bg-color: #000000;
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --text-main: #ffffff;
-      --text-muted: #a1a1aa;
-      --accent-white: #ffffff;
-      --nav-height: 70px;
+      --bg-dark: #020617;        /* Deep Navy */
+      --bg-card: #0f172a;       /* Slate Blue */
+      --card-border: rgba(56, 189, 248, 0.1); 
+      --accent-blue: #38bdf8;    /* Sky Blue */
+      --accent-glow: rgba(56, 189, 248, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --nav-height: 80px;
     }
 
+    /* --- 2. BASE RESET --- */
     body {
-      background-color: var(--bg-color);
+      background-color: var(--bg-dark);
+      background-image: 
+        radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent),
+        radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.05), transparent);
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-main);
       margin: 0;
-      overflow-x: hidden;
+      min-height: 100vh;
     }
 
-    /* --- NAVIGATION (SIMULATR STYLE) --- */
+    /* --- 3. NAVIGATION --- */
     nav {
       height: var(--nav-height);
       width: 100%;
@@ -39,69 +45,76 @@
       position: fixed;
       top: 0;
       z-index: 1000;
-      backdrop-filter: blur(10px);
+      background: rgba(2, 6, 23, 0.8);
+      backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--card-border);
     }
 
     .nav-container {
       width: 100%;
-      max-width: 1100px;
-      padding: 0 24px;
+      max-width: 1200px;
+      padding: 0 40px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .nav-logo {
-      font-weight: 700;
+      font-weight: 800;
+      font-size: 1.4rem;
       letter-spacing: -1px;
-      font-size: 1.2rem;
+      color: var(--text-main);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .nav-logo span {
+        color: var(--accent-blue);
     }
 
     .nav-actions {
       display: flex;
       gap: 12px;
-      align-items: center;
     }
 
-    /* Minimalist Buttons */
     .btn {
-      padding: 8px 18px;
-      border-radius: 99px;
-      font-size: 0.9rem;
-      font-weight: 500;
+      padding: 10px 22px;
+      border-radius: 12px;
+      font-size: 0.85rem;
+      font-weight: 600;
       text-decoration: none;
       transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
     }
 
-    .btn-home {
+    .btn-ghost {
       color: var(--text-muted);
     }
-    .btn-home:hover {
-      color: #fff;
-      background: rgba(255,255,255,0.05);
+
+    .btn-ghost:hover {
+      color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.05);
     }
 
-    .btn-signin {
-      background: var(--accent-white);
-      color: #000;
-      border: 1px solid var(--accent-white);
-    }
-    .btn-signin:hover {
-      background: transparent;
-      color: #fff;
+    .btn-primary {
+      background: var(--accent-blue);
+      color: var(--bg-dark);
+      box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.3);
     }
 
-    /* --- CONTENT LAYOUT --- */
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px 0 rgba(56, 189, 248, 0.4);
+    }
+
+    /* --- 4. HERO SECTION --- */
     .main-content {
-      padding-top: calc(var(--nav-height) + 60px);
-      max-width: 1000px;
+      padding-top: calc(var(--nav-height) + 80px);
+      max-width: 1100px;
       margin: 0 auto;
-      padding-left: 20px;
-      padding-right: 20px;
+      padding-left: 24px;
+      padding-right: 24px;
     }
 
     header {
@@ -112,28 +125,35 @@
     h1 {
       font-size: clamp(2.5rem, 8vw, 4.5rem);
       font-weight: 800;
-      letter-spacing: -0.05em;
-      margin: 0 0 20px 0;
-      background: linear-gradient(180deg, #fff 30%, #555 100%);
+      letter-spacing: -0.04em;
+      line-height: 1.1;
+      margin-bottom: 24px;
+      background: linear-gradient(to bottom, #fff 40%, var(--text-muted));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
-    /* --- SEARCH --- */
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.15rem;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* --- 5. SEARCH (SaaS Style) --- */
     .search-wrapper {
-      background: rgba(255, 255, 255, 0.03);
+      background: var(--bg-card);
       border: 1px solid var(--card-border);
       border-radius: 16px;
-      padding: 16px 20px;
+      padding: 12px 20px;
       display: flex;
       align-items: center;
       max-width: 500px;
       margin: 0 auto 80px;
-      transition: border 0.3s ease;
+      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
     }
-    .search-wrapper:focus-within {
-      border-color: rgba(255,255,255,0.3);
-    }
+
     .search-input {
       background: transparent;
       border: none;
@@ -144,44 +164,82 @@
       font-size: 1rem;
     }
 
-    /* --- GRID --- */
+    /* --- 6. CARDS (Glassmorphism) --- */
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
       gap: 20px;
     }
 
     .card {
-      background: var(--card-bg);
+      background: linear-gradient(145deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.3));
       border: 1px solid var(--card-border);
       border-radius: 24px;
       padding: 32px;
       text-decoration: none;
-      transition: 0.3s ease;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      position: relative;
+      overflow: hidden;
     }
+
+    .card::before {
+        content: "";
+        position: absolute;
+        top: 0; left: 0; right: 0; bottom: 0;
+        background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent 70%);
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
     .card:hover {
-      border-color: rgba(255,255,255,0.2);
+      border-color: var(--accent-blue);
       transform: translateY(-5px);
-      background: rgba(255,255,255,0.05);
+      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
     }
 
-    .card h3 { color: #fff; margin: 0 0 10px 0; }
-    .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin: 0; }
+    .card:hover::before {
+        opacity: 1;
+    }
 
-    /* --- FOOTER --- */
+    .card h3 { 
+      color: #fff; 
+      margin: 0 0 12px 0; 
+      font-size: 1.25rem; 
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    
+    .card h3::after {
+        content: "\eb8f"; /* Remix Icon arrow */
+        font-family: 'remixicon';
+        font-size: 1rem;
+        color: var(--accent-blue);
+        opacity: 0;
+        transform: translateX(-10px);
+        transition: all 0.3s;
+    }
+
+    .card:hover h3::after {
+        opacity: 1;
+        transform: translateX(0);
+    }
+
+    .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+
+    /* --- 7. FOOTER --- */
     footer {
       margin-top: 100px;
       padding: 60px 20px;
       border-top: 1px solid var(--card-border);
       text-align: center;
     }
-    .email-link {
-      color: var(--text-muted);
+
+    .footer-email {
+      color: var(--accent-blue);
       text-decoration: none;
-      font-size: 0.9rem;
-      transition: color 0.3s;
+      font-weight: 500;
     }
-    .email-link:hover { color: #fff; }
 
     .hidden { display: none !important; }
 
@@ -191,43 +249,44 @@
 
   <nav>
     <div class="nav-container">
-      <div class="nav-logo">UC.</div>
+      <a href="index.html" class="nav-logo">UC<span>.</span></a>
       <div class="nav-actions">
-        <a href="#" class="btn btn-home">Home</a>
-        <a href="mailto:undergradcircle@gmail.com" class="btn btn-signin">Sign In</a>
+        <a href="index.html" class="btn btn-ghost">Home</a>
+        <a href="dashboard.html" class="btn btn-ghost">Dashboard</a>
+        <a href="signin.html" class="btn btn-primary">Sign In</a>
       </div>
     </div>
   </nav>
 
   <div class="main-content">
     <header>
-      <h1>The Undergrad Circle</h1>
-      <p style="color: var(--text-muted); font-size: 1.1rem;">Unlock your academic potential.</p>
+      <h1>Global Research <br>Made Simple.</h1>
+      <p class="subtitle">Join the circle of elite undergraduates accessing world-class scholarships and research stipends.</p>
     </header>
 
     <div class="search-wrapper">
-      <i class="ri-search-line" style="color: var(--text-muted)"></i>
-      <input type="text" id="searchInput" class="search-input" placeholder="Search resources...">
+      <i class="ri-search-2-line" style="color: var(--accent-blue); font-size: 1.2rem;"></i>
+      <input type="text" id="searchInput" class="search-input" placeholder="Search opportunities..." autocomplete="off">
     </div>
 
     <div class="grid-container" id="cardsGrid">
-      <a href="#" class="card searchable-card">
+      <a href="scholarships.html" class="card searchable-card">
         <h3>Scholarships</h3>
-        <p>Verified fully-funded opportunities for 2026/27 cohorts.</p>
+        <p>Unlock fully-funded international programs and monthly stipends designed for high-achievers.</p>
       </a>
-      <a href="#" class="card searchable-card">
+      <a href="research.html" class="card searchable-card">
         <h3>Research Labs</h3>
-        <p>Direct contact info for PIs at top-tier global institutions.</p>
+        <p>Direct access to Principal Investigators at Ivy League and global institutions for summer cycles.</p>
       </a>
-      <a href="#" class="card searchable-card">
-        <h3>Mentorship</h3>
-        <p>One-on-one sessions with alumni from Harvard, Oxford, and more.</p>
+      <a href="ai-check.html" class="card searchable-card">
+        <h3>AI Matcher</h3>
+        <p>Our proprietary algorithm analyzes your CV against historical acceptance data for instant feedback.</p>
       </a>
     </div>
 
     <footer>
-      <p style="margin-bottom: 8px;">Designed by Simra Faisal</p>
-      <a href="mailto:undergradcircle@gmail.com" class="email-link">undergradcircle@gmail.com</a>
+      <p style="color: var(--text-muted); margin-bottom: 8px;">Built by Simra Faisal</p>
+      <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
     </footer>
   </div>
 
@@ -238,7 +297,7 @@
     searchInput.addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase();
       cards.forEach(card => {
-        const text = card.textContent.toLowerCase();
+        const text = card.innerText.toLowerCase();
         card.classList.toggle('hidden', !text.includes(term));
       });
     });
