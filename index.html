@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Undergrad Circle | Simra Faisal</title>
+  <title>Undergrad Circle | Precision Research</title>
   
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,21 +11,16 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <style>
-    /* --- 1. PREMIUM SAAS COLOR PALETTE (Dark Blue/Purple Vibe) --- */
     :root {
-      --bg-dark: #0a0e27;        /* Very dark blue base */
-      --bg-card: rgba(16, 24, 60, 0.6); /* Translucent dark blue for cards */
-      --card-border: rgba(255, 255, 255, 0.1); 
-      --card-border-hover: rgba(255, 255, 255, 0.25);
-      --accent-main: #ffffff;    /* White for primary buttons */
-      --accent-highlight: #b6adff; /* Light purple for text highlight */
-      --text-main: #ffffff;
-      --text-muted: #cbd5e1;     /* Slate 300 */
-      --nav-height: 70px;
-      --brand-bg: #0d111d;       /* Almost black/dark navy for the bottom footer */
+      --bg-deep: #020617;
+      --accent-primary: #6366f1; /* Indigo */
+      --accent-glow: rgba(99, 102, 241, 0.15);
+      --glass-bg: rgba(15, 23, 42, 0.6);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
     }
 
-    /* --- 2. BASE RESET & GRADIENT BACKGROUND --- */
     * {
       box-sizing: border-box;
       margin: 0;
@@ -33,33 +28,33 @@
     }
 
     body {
-      background-color: var(--bg-dark);
-      /* Radial gradient matching the uploaded image */
-      background-image: radial-gradient(circle at center 30%, #2f3688 0%, #161c4d 50%, #0a0e27 100%);
+      background-color: var(--bg-deep);
+      /* Subtle mesh gradient for depth */
+      background-image: 
+        radial-gradient(at 0% 0%, rgba(30, 58, 138, 0.3) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(67, 56, 202, 0.2) 0px, transparent 50%);
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-main);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
+      line-height: 1.6;
+      overflow-x: hidden;
     }
 
-    /* --- 3. NAVIGATION --- */
+    /* --- GLASSMORPHIC NAV --- */
     nav {
-      height: var(--nav-height);
+      position: fixed;
+      top: 0;
       width: 100%;
+      height: 72px;
       display: flex;
       justify-content: center;
       align-items: center;
-      position: fixed;
-      top: 0;
       z-index: 1000;
-      background: rgba(10, 14, 39, 0.3);
+      background: rgba(2, 6, 23, 0.7);
       backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-bottom: 1px solid var(--glass-border);
     }
 
-    .nav-container {
+    .nav-content {
       width: 100%;
       max-width: 1200px;
       padding: 0 24px;
@@ -68,302 +63,228 @@
       align-items: center;
     }
 
-    .nav-logo {
-      font-weight: 700;
-      font-size: 1.25rem;
-      letter-spacing: -0.5px;
-      color: var(--text-main);
-      text-decoration: none;
+    .logo {
+      font-weight: 800;
+      font-size: 1.4rem;
+      letter-spacing: -1px;
       display: flex;
       align-items: center;
-      gap: 8px;
-    }
-
-    .nav-logo span {
-      color: var(--accent-highlight);
-    }
-
-    .nav-actions {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-    }
-
-    .nav-links a {
-      color: var(--text-muted);
+      gap: 10px;
+      color: #fff;
       text-decoration: none;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: color 0.2s;
-      margin-right: 16px;
     }
 
-    .nav-links a:hover {
-      color: var(--text-main);
-    }
-
-    /* --- 4. BUTTONS --- */
-    .btn {
-      padding: 12px 24px;
-      border-radius: 8px; /* Slightly squared like the image */
-      font-size: 0.9rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .btn-primary {
-      background: var(--accent-main);
-      color: #000000;
-    }
-
-    .btn-primary:hover {
-      background: #e2e8f0;
-      transform: translateY(-2px);
-    }
-
-    .btn-outline {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-main);
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    .btn-outline:hover {
-      background: rgba(255, 255, 255, 0.15);
-      border-color: rgba(255, 255, 255, 0.4);
-    }
-
-    /* --- 5. HERO SECTION --- */
-    .main-content {
-      padding-top: calc(var(--nav-height) + 80px);
-      max-width: 1100px;
-      margin: 0 auto;
-      padding-left: 24px;
-      padding-right: 24px;
-      flex: 1;
-    }
-
-    header {
+    /* --- HERO & SEARCH --- */
+    .hero {
+      padding: 160px 24px 80px;
       text-align: center;
-      margin-bottom: 80px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      max-width: 900px;
+      margin: 0 auto;
     }
 
     .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+      background: var(--accent-glow);
+      color: var(--accent-primary);
       padding: 6px 16px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.15);
-      background: rgba(255, 255, 255, 0.05);
-      font-size: 0.8rem;
-      font-weight: 500;
-      color: var(--text-main);
+      border-radius: 100px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border: 1px solid rgba(99, 102, 241, 0.3);
+      display: inline-block;
       margin-bottom: 24px;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 700;
-      letter-spacing: -0.03em;
+      font-size: clamp(2.5rem, 8vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -0.04em;
       line-height: 1.1;
       margin-bottom: 24px;
-      color: var(--text-main);
+      background: linear-gradient(to right, #fff, #94a3b8);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
     }
 
-    /* Highlight class for the purple text */
-    .highlight-text {
-      color: var(--accent-highlight);
-    }
-
-    .subtitle {
-      color: var(--text-muted);
-      font-size: 1.1rem;
-      max-width: 600px;
-      margin: 0 auto 40px;
-      line-height: 1.6;
-    }
-
-    .hero-cta {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-    }
-
-    /* --- 6. CARDS GRID --- */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      margin-bottom: 80px;
-    }
-
-    .card {
-      background: var(--bg-card);
-      backdrop-filter: blur(10px);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 32px;
-      text-decoration: none;
-      transition: all 0.3s ease;
+    /* --- THE SEARCH BAR (Glassmorphic) --- */
+    .search-container {
       position: relative;
+      max-width: 600px;
+      margin: 40px auto;
+      transition: transform 0.3s ease;
     }
 
-    .card:hover {
-      border-color: var(--card-border-hover);
-      background: rgba(255, 255, 255, 0.05);
-      transform: translateY(-4px);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    .search-bar {
+      width: 100%;
+      padding: 18px 24px 18px 56px;
+      background: var(--glass-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--glass-border);
+      border-radius: 16px;
+      color: white;
+      font-size: 1.1rem;
+      outline: none;
+      transition: all 0.3s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+    }
+
+    .search-bar:focus {
+      border-color: var(--accent-primary);
+      background: rgba(15, 23, 42, 0.8);
+      box-shadow: 0 0 20px var(--accent-glow);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1.4rem;
+    }
+
+    /* --- GRID SECTION --- */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+      max-width: 1200px;
+      margin: 0 auto 100px;
+      padding: 0 24px;
+    }
+
+    .glass-card {
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      padding: 40px;
+      border-radius: 24px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-decoration: none;
+    }
+
+    .glass-card:hover {
+      transform: translateY(-10px);
+      background: rgba(30, 41, 59, 0.5);
+      border-color: rgba(255, 255, 255, 0.2);
     }
 
     .card-icon {
-      height: 48px;
-      width: 48px;
+      width: 50px;
+      height: 50px;
+      background: var(--accent-primary);
       border-radius: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid var(--card-border);
       display: flex;
       align-items: center;
       justify-content: center;
-      margin-bottom: 20px;
-      color: var(--accent-highlight);
+      margin-bottom: 24px;
       font-size: 1.5rem;
+      color: white;
+      box-shadow: 0 10px 20px rgba(99, 102, 241, 0.3);
     }
 
-    .card h3 { 
-      color: #fff; 
-      margin: 0 0 12px 0; 
-      font-size: 1.25rem; 
-      font-weight: 600;
-    }
-
-    .card p { 
-      color: var(--text-muted); 
-      font-size: 0.95rem; 
-      line-height: 1.6; 
-    }
-
-    /* --- 7. NEW BOTTOM BRAND SECTION --- */
-    .bottom-brand-wrapper {
-      background-color: var(--brand-bg);
-      width: 100%;
-      margin-top: auto;
-      border-top: 1px solid rgba(255,255,255,0.05);
-    }
-
-    .brand-bar {
-      padding: 40px 0;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
-      color: var(--text-main);
-    }
-
-    .brand-bar i {
-      font-size: 2rem;
-      color: #7cb3ff; /* A nice tech-blue for the logo icon */
-    }
-
-    .brand-bar span {
+    .glass-card h3 {
       font-size: 1.5rem;
-      font-weight: 700;
-      letter-spacing: -0.5px;
+      margin-bottom: 12px;
     }
 
+    .glass-card p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    /* --- FOOTER --- */
     footer {
-      padding: 20px 24px 40px;
+      border-top: 1px solid var(--glass-border);
+      padding: 60px 24px;
       text-align: center;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 8px;
-      background-color: var(--brand-bg);
+      background: #010409;
     }
 
-    .footer-email {
+    .footer-logo {
+      margin-bottom: 20px;
+      opacity: 0.8;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 30px;
+      margin-bottom: 30px;
+    }
+
+    .footer-links a {
       color: var(--text-muted);
       text-decoration: none;
-      font-size: 0.875rem;
-      transition: color 0.2s;
+      font-size: 0.9rem;
     }
 
-    .footer-email:hover {
-      color: var(--text-main);
-    }
+    .footer-links a:hover { color: #fff; }
+
   </style>
 </head>
 <body>
 
   <nav>
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">UC<span>.</span></a>
-      <div class="nav-actions">
-        <div class="nav-links hidden-mobile">
-          <a href="#">Features</a>
-          <a href="#">Research</a>
-          <a href="#">Pricing</a>
-        </div>
-        <a href="signin.html" class="btn btn-outline" style="padding: 8px 16px;">Sign In</a>
+    <div class="nav-content">
+      <a href="#" class="logo">
+        <i class="ri-radar-line" style="color: var(--accent-primary);"></i>
+        UC<span>.</span>
+      </a>
+      <div style="display: flex; gap: 20px;">
+        <a href="#" style="color: var(--text-muted); text-decoration: none; font-size: 0.9rem; font-weight: 500;">Sign In</a>
+        <a href="#" style="background: #fff; color: #000; padding: 8px 18px; border-radius: 8px; text-decoration: none; font-size: 0.9rem; font-weight: 600;">Join Circle</a>
       </div>
     </div>
   </nav>
 
-  <div class="main-content">
-    <header>
-      <div class="hero-badge">
-        <i class="ri-sparkling-line"></i> Introducing AI Matcher v2.0
-      </div>
-      <h1>Global Research <br>Made <span class="highlight-text">Simple?</span></h1>
-      <p class="subtitle">Join hundreds of elite undergraduates using UC to validate and secure world-class scholarships and research stipends.</p>
-      
-      <div class="hero-cta">
-        <a href="dashboard.html" class="btn btn-primary">
-          <i class="ri-flashlight-line"></i> Start Exploring →
-        </a>
-        <a href="#features" class="btn btn-outline">
-          View Opportunities
-        </a>
-      </div>
-    </header>
-
-    <div class="grid-container" id="features">
-      <a href="scholarships.html" class="card">
-        <div class="card-icon"><i class="ri-graduation-cap-line"></i></div>
-        <h3>Scholarships</h3>
-        <p>Unlock fully-funded international programs and monthly stipends designed for high-achievers.</p>
-      </a>
-      <a href="research.html" class="card">
-        <div class="card-icon"><i class="ri-microscope-line"></i></div>
-        <h3>Research Labs</h3>
-        <p>Direct access to Principal Investigators at Ivy League and global institutions for summer cycles.</p>
-      </a>
-      <a href="ai-check.html" class="card">
-        <div class="card-icon"><i class="ri-robot-2-line"></i></div>
-        <h3>AI Matcher</h3>
-        <p>Our proprietary algorithm analyzes your CV against historical acceptance data for instant feedback.</p>
-      </a>
+  <section class="hero">
+    <div class="hero-badge">
+      <i class="ri-shining-2-line"></i> Empowering the next generation of researchers
     </div>
-  </div>
-
-  <div class="bottom-brand-wrapper">
-    <div class="brand-bar">
-      <i class="ri-node-tree"></i> <span>Undergrad Circle</span>
+    <h1>Global Research Labs <br>at your fingertips.</h1>
+    
+    <div class="search-container">
+      <i class="ri-search-line search-icon"></i>
+      <input type="text" class="search-bar" placeholder="Search by university, field, or PI name...">
     </div>
 
-    <footer>
-      <p style="color: rgba(255,255,255,0.4); font-size: 0.875rem;">© 2026 The Undergrad Circle. Built by Simra Faisal.</p>
-      <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
-    </footer>
+    <p style="color: var(--text-muted); max-width: 600px; margin: 0 auto;">
+      Advanced matching for fully-funded PhDs, Summer Research, and International Scholarships.
+    </p>
+  </section>
+
+  <div class="features-grid">
+    <a href="#" class="glass-card">
+      <div class="card-icon"><i class="ri-microscope-line"></i></div>
+      <h3>Lab Access</h3>
+      <p>Direct contact lines to PIs at MIT, Stanford, and Oxford. Bypass the generic application portals.</p>
+    </a>
+
+    <a href="#" class="glass-card">
+      <div class="card-icon"><i class="ri-copper-diamond-line"></i></div>
+      <h3>Funding Hub</h3>
+      <p>A curated database of 500+ stipends and fully-funded fellowships updated daily by our AI.</p>
+    </a>
+
+    <a href="#" class="glass-card">
+      <div class="card-icon"><i class="ri-qr-code-line"></i></div>
+      <h3>CV Analysis</h3>
+      <p>Upload your CV to see your "Match Score" against historical acceptance data for specific labs.</p>
+    </a>
   </div>
+
+  <footer>
+    <div class="footer-logo">
+      <h2 style="font-weight: 800; letter-spacing: -1px;">Undergrad Circle</h2>
+      <p style="color: var(--text-muted); font-size: 0.85rem; margin-top: 8px;">Built by Simra Faisal • 2026</p>
+    </div>
+    <div class="footer-links">
+      <a href="#">Security</a>
+      <a href="#">API Docs</a>
+      <a href="#">Privacy</a>
+      <a href="mailto:undergradcircle@gmail.com">Contact</a>
+    </div>
+  </footer>
 
 </body>
 </html>
