@@ -1,263 +1,265 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>The Undergrad Circle | Simra Faisal</title>
-  
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Undergrad Circle | Research Portal</title>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
-  <style>
-    :root {
-      --bg-dark: #020617;
-      --bg-card: rgba(15, 23, 42, 0.6);
-      --card-border: rgba(56, 189, 248, 0.1);
-      --accent-blue: #38bdf8;
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --nav-height: 80px;
-    }
+  <style>
+    :root {
+      --bg-deep: #05070a;
+      --sidebar-bg: #0d1117; /* Darker sidebar matching the image */
+      --accent-purple: #9b87ff;
+      --accent-glow: rgba(155, 135, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.08);
+      --text-main: #f8fafc;
+      --text-muted: #8a8f98;
+      --sidebar-width: 280px;
+    }
 
-    /* --- 1. ANIMATED BACKGROUND --- */
-    body {
-      background-color: var(--bg-dark);
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      color: var(--text-main);
-      margin: 0;
-      min-height: 100vh;
-      overflow-x: hidden;
-      position: relative;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* Floating Blobs */
-    .bg-glow {
-      position: fixed;
-      top: 0; left: 0; right: 0; bottom: 0;
-      z-index: -1;
-      overflow: hidden;
-    }
+    body {
+      background-color: var(--bg-deep);
+      background-image: radial-gradient(circle at 60% 10%, #161b3d 0%, #05070a 50%);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      color: var(--text-main);
+      display: flex;
+      min-height: 100vh;
+    }
 
-    .blob {
-      position: absolute;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      filter: blur(60px);
-      animation: drift 20s infinite alternate ease-in-out;
-    }
+    /* --- SIDEBAR (MATCHING UPLOADED IMAGE) --- */
+    .sidebar {
+      width: var(--sidebar-width);
+      height: 100vh;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--glass-border);
+      display: flex;
+      flex-direction: column;
+      padding: 40px 20px;
+      position: fixed;
+      left: 0;
+      top: 0;
+      z-index: 100;
+    }
 
-    .blob-1 { top: -10%; left: -10%; animation-duration: 25s; }
-    .blob-2 { bottom: -10%; right: -10%; background: radial-gradient(circle, rgba(29, 78, 216, 0.1) 0%, transparent 70%); }
+    /* Logo Lockup */
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      padding: 0 16px 48px;
+      text-decoration: none;
+    }
 
-    @keyframes drift {
-      from { transform: translate(0, 0) scale(1); }
-      to { transform: translate(100px, 50px) scale(1.1); }
-    }
+    .logo-text {
+      font-weight: 800;
+      font-size: 2rem;
+      color: #fff;
+      letter-spacing: -1.5px;
+    }
 
-    /* --- 2. NAVIGATION --- */
-    nav {
-      height: var(--nav-height);
-      width: 100%;
-      display: flex;
-      justify-content: center;
-      position: fixed;
-      top: 0;
-      z-index: 1000;
-      background: rgba(2, 6, 23, 0.7);
-      backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--card-border);
-    }
+    .logo-dot { color: var(--accent-purple); }
 
-    .nav-container {
-      width: 100%;
-      max-width: 1200px;
-      padding: 0 40px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+    .nav-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      flex: 1;
+    }
 
-    .nav-logo {
-      font-weight: 800;
-      font-size: 1.4rem;
-      letter-spacing: -1px;
-      color: #fff;
-      text-decoration: none;
-    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      border-radius: 12px;
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: all 0.2s ease;
+    }
 
-    .nav-logo span { color: var(--accent-blue); }
+    .nav-item i { font-size: 1.3rem; }
 
-    .btn {
-      padding: 10px 22px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-    }
+    /* Active State */
+    .nav-item.active {
+      background: linear-gradient(90deg, rgba(155, 135, 255, 0.12) 0%, rgba(155, 135, 255, 0) 100%);
+      color: #fff;
+      position: relative;
+    }
 
-    .btn-ghost { color: var(--text-muted); }
-    .btn-ghost:hover { color: var(--accent-blue); background: rgba(56, 189, 248, 0.05); }
+    /* The Purple Left Border Highlight */
+    .nav-item.active::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 15%;
+      height: 70%;
+      width: 4px;
+      background: var(--accent-purple);
+      border-radius: 0 4px 4px 0;
+      box-shadow: 0 0 15px var(--accent-purple);
+    }
 
-    .btn-primary {
-      background: var(--accent-blue);
-      color: var(--bg-dark);
-      box-shadow: 0 0 20px rgba(56, 189, 248, 0.2);
-    }
+    .nav-item:hover:not(.active) {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.03);
+    }
 
-    /* --- 3. HERO & SEARCH --- */
-    .main-content {
-      padding-top: calc(var(--nav-height) + 100px);
-      max-width: 1100px;
-      margin: 0 auto;
-      padding-left: 24px;
-      padding-right: 24px;
-      position: relative;
-    }
+    .logout-box {
+      margin-top: auto;
+      padding-top: 20px;
+    }
 
-    header { text-align: center; margin-bottom: 60px; }
+    /* --- MAIN PORTAL CONTENT --- */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      padding: 40px 60px;
+    }
 
-    h1 {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1;
-      margin-bottom: 24px;
-      background: linear-gradient(to bottom, #fff 50%, #64748b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    .search-container {
+      max-width: 500px;
+      position: relative;
+      margin-bottom: 60px;
+    }
 
-    .search-wrapper {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 14px 24px;
-      display: flex;
-      align-items: center;
-      max-width: 500px;
-      margin: 0 auto 80px;
-      transition: border 0.3s;
-    }
+    .search-container i {
+      position: absolute;
+      left: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--text-muted);
+      font-size: 1.2rem;
+    }
 
-    .search-wrapper:focus-within { border-color: var(--accent-blue); }
+    .main-search-input {
+      width: 100%;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid var(--glass-border);
+      padding: 16px 20px 16px 56px;
+      border-radius: 16px;
+      color: #fff;
+      font-size: 1rem;
+      outline: none;
+      transition: 0.3s ease;
+    }
 
-    .search-input {
-      background: transparent;
-      border: none;
-      color: #fff;
-      outline: none;
-      width: 100%;
-      margin-left: 12px;
-      font-size: 1rem;
-    }
+    .main-search-input:focus {
+      border-color: var(--accent-purple);
+      background: rgba(255, 255, 255, 0.06);
+      box-shadow: 0 0 25px var(--accent-glow);
+    }
 
-    /* --- 4. CARDS --- */
-    .grid-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-    }
+    h1 {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      margin-bottom: 12px;
+    }
 
-    .card {
-      background: var(--bg-card);
-      border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 32px;
-      text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
-      backdrop-filter: blur(10px);
-    }
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      margin-bottom: 48px;
+    }
 
-    .card:hover {
-      border-color: rgba(56, 189, 248, 0.4);
-      transform: translateY(-8px);
-      background: rgba(30, 41, 59, 0.6);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.3);
-    }
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 24px;
+    }
 
-    .card h3 { color: #fff; margin: 0 0 12px 0; font-size: 1.3rem; }
-    .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+    .portal-card {
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px solid var(--glass-border);
+      padding: 32px;
+      border-radius: 24px;
+      backdrop-filter: blur(10px);
+      transition: 0.3s ease;
+    }
 
-    /* --- 5. FOOTER --- */
-    footer {
-      margin-top: 120px;
-      padding: 60px 20px;
-      text-align: center;
-      border-top: 1px solid var(--card-border);
-    }
+    .portal-card:hover {
+      background: rgba(255, 255, 255, 0.04);
+      transform: translateY(-5px);
+      border-color: rgba(155, 135, 255, 0.3);
+    }
 
-    .footer-email { color: var(--accent-blue); text-decoration: none; font-weight: 500; }
-
-    .hidden { display: none !important; }
-  </style>
+    .icon-box {
+      width: 52px;
+      height: 52px;
+      background: var(--accent-glow);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      color: var(--accent-purple);
+      font-size: 1.5rem;
+    }
+  </style>
 </head>
 <body>
 
-  <div class="bg-glow">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-  </div>
+  <aside class="sidebar">
+    <div class="brand-logo">
+      <div class="logo-text">UC<span class="logo-dot">.</span></div>
+    </div>
 
-  <nav>
-    <div class="nav-container">
-      <a href="index.html" class="nav-logo">UC<span>.</span></a>
-      <div class="nav-actions">
-        <a href="index.html" class="btn btn-ghost">Home</a>
-        <a href="dashboard.html" class="btn btn-ghost">Dashboard</a>
-        <a href="signin.html" class="btn btn-primary">Sign In</a>
-      </div>
-    </div>
-  </nav>
+    <nav class="nav-list">
+      <a href="#" class="nav-item active">
+        <i class="ri-layout-grid-fill"></i> Overview
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ri-medal-line"></i> Scholarships
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ri-microscope-line"></i> Research
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ri-calendar-todo-line"></i> Calendar
+      </a>
+      <a href="#" class="nav-item">
+        <i class="ri-user-settings-line"></i> Profile
+      </a>
+    </nav>
 
-  <div class="main-content">
-    <header>
-      <h1>Bridge to the <br>Academic Elite.</h1>
-      <p style="color: var(--text-muted); font-size: 1.2rem; max-width: 600px; margin: 0 auto;">Curated scholarship pipelines and research opportunities for the next generation of global scholars.</p>
-    </header>
+    <div class="logout-box">
+      <a href="#" class="nav-item">
+        <i class="ri-logout-box-r-line"></i> Logout
+      </a>
+    </div>
+  </aside>
 
-    <div class="search-wrapper">
-      <i class="ri-search-2-line" style="color: var(--accent-blue);"></i>
-      <input type="text" id="searchInput" class="search-input" placeholder="Search research cycles..." autocomplete="off">
-    </div>
+  <main class="main-content">
+    <div class="search-container">
+      <i class="ri-search-line"></i>
+      <input type="text" class="main-search-input" placeholder="Search scholarship funds or lab IDs...">
+    </div>
 
-    <div class="grid-container" id="cardsGrid">
-      <a href="scholarships.html" class="card searchable-card">
-        <h3>Scholarships</h3>
-        <p>Access high-stipend programs and fully-funded opportunities at global institutions.</p>
-      </a>
-      <a href="research.html" class="card searchable-card">
-        <h3>Research Cohorts</h3>
-        <p>Browse active PI listings looking for undergraduate summer research assistants.</p>
-      </a>
-      <a href="ai-check.html" class="card searchable-card">
-        <h3>Success Matcher</h3>
-        <p>Use our neural model to predict your admission chances based on profile metrics.</p>
-      </a>
-    </div>
+    <h1>Welcome, Scholar</h1>
+    <p class="subtitle">Access your global opportunities from the Undergrad Circle hub.</p>
 
-    <footer>
-      <p style="color: var(--text-muted); margin-bottom: 10px;">Created by Simra Faisal</p>
-      <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
-    </footer>
-  </div>
-
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.searchable-card');
-
-    searchInput.addEventListener('input', (e) => {
-      const term = e.target.value.toLowerCase();
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.classList.toggle('hidden', !text.includes(term));
-      });
-    });
-  </script>
+    <div class="card-grid">
+      <div class="portal-card">
+        <div class="icon-box"><i class="ri-sparkling-line"></i></div>
+        <h3>AI Matchmaker</h3>
+        <p>Explore labs that align with your specific research history and publications.</p>
+      </div>
+      
+      <div class="portal-card">
+        <div class="icon-box"><i class="ri-earth-line"></i></div>
+        <h3>Global Fellows</h3>
+        <p>Connect with other undergraduates currently researching in Ivy League labs.</p>
+      </div>
+    </div>
+  </main>
 
 </body>
 </html>
