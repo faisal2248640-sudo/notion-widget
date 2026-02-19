@@ -11,28 +11,37 @@
   <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
 
   <style>
-    /* --- 1. SIMULATR-INSPIRED COLOR PALETTE --- */
+    /* --- 1. PREMIUM SAAS COLOR PALETTE --- */
     :root {
-      --bg-dark: #020617;        /* Deep Navy */
-      --bg-card: #0f172a;       /* Slate Blue */
-      --card-border: rgba(56, 189, 248, 0.1); 
-      --accent-blue: #38bdf8;    /* Sky Blue */
-      --accent-glow: rgba(56, 189, 248, 0.4);
+      --bg-dark: #000000;        /* True Black */
+      --bg-card: #09090b;       /* Zinc 950 */
+      --card-border: rgba(255, 255, 255, 0.08); 
+      --card-border-hover: rgba(255, 255, 255, 0.2);
+      --accent-main: #ededed;    /* Off-white for stark contrast */
+      --accent-glow: rgba(255, 255, 255, 0.1);
       --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --nav-height: 80px;
+      --text-muted: #a1a1aa;     /* Zinc 400 */
+      --nav-height: 70px;
+      --brand-bg: #0f172a; /* Dark blue background for brand section */
     }
 
-    /* --- 2. BASE RESET --- */
+    /* --- 2. BASE RESET & MESH BACKGROUND --- */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
     body {
       background-color: var(--bg-dark);
       background-image: 
-        radial-gradient(circle at 50% -20%, rgba(56, 189, 248, 0.15), transparent),
-        radial-gradient(circle at 0% 100%, rgba(56, 189, 248, 0.05), transparent);
+        radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.04), transparent 50%),
+        radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.02), transparent 50%);
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-main);
-      margin: 0;
       min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
 
     /* --- 3. NAVIGATION --- */
@@ -45,24 +54,25 @@
       position: fixed;
       top: 0;
       z-index: 1000;
-      background: rgba(2, 6, 23, 0.8);
-      backdrop-filter: blur(12px);
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--card-border);
     }
 
     .nav-container {
       width: 100%;
       max-width: 1200px;
-      padding: 0 40px;
+      padding: 0 24px;
       display: flex;
       justify-content: space-between;
       align-items: center;
     }
 
     .nav-logo {
-      font-weight: 800;
-      font-size: 1.4rem;
-      letter-spacing: -1px;
+      font-weight: 700;
+      font-size: 1.25rem;
+      letter-spacing: -0.5px;
       color: var(--text-main);
       text-decoration: none;
       display: flex;
@@ -71,177 +81,218 @@
     }
 
     .nav-logo span {
-        color: var(--accent-blue);
+        color: var(--text-muted);
     }
 
     .nav-actions {
       display: flex;
-      gap: 12px;
+      gap: 16px;
+      align-items: center;
     }
 
+    .nav-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.875rem;
+      font-weight: 500;
+      transition: color 0.2s;
+      margin-right: 16px;
+    }
+
+    .nav-links a:hover {
+      color: var(--text-main);
+    }
+
+    /* --- 4. BUTTONS --- */
     .btn {
-      padding: 10px 22px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 999px;
+      font-size: 0.875rem;
+      font-weight: 500;
       text-decoration: none;
       transition: all 0.2s ease;
-    }
-
-    .btn-ghost {
-      color: var(--text-muted);
-    }
-
-    .btn-ghost:hover {
-      color: var(--accent-blue);
-      background: rgba(56, 189, 248, 0.05);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .btn-primary {
-      background: var(--accent-blue);
-      color: var(--bg-dark);
-      box-shadow: 0 4px 14px 0 rgba(56, 189, 248, 0.3);
+      background: var(--accent-main);
+      color: #000;
     }
 
     .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px 0 rgba(56, 189, 248, 0.4);
+      background: #fff;
+      transform: scale(1.02);
     }
 
-    /* --- 4. HERO SECTION --- */
+    .btn-outline {
+      background: transparent;
+      color: var(--text-main);
+      border: 1px solid var(--card-border);
+    }
+
+    .btn-outline:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: var(--card-border-hover);
+    }
+
+    /* --- 5. HERO SECTION --- */
     .main-content {
-      padding-top: calc(var(--nav-height) + 80px);
+      padding-top: calc(var(--nav-height) + 100px);
       max-width: 1100px;
       margin: 0 auto;
       padding-left: 24px;
       padding-right: 24px;
+      flex: 1;
     }
 
     header {
       text-align: center;
-      margin-bottom: 60px;
+      margin-bottom: 80px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      border-radius: 999px;
+      border: 1px solid var(--card-border);
+      background: rgba(255, 255, 255, 0.03);
+      font-size: 0.8rem;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .hero-badge i {
+      color: #fff;
     }
 
     h1 {
-      font-size: clamp(2.5rem, 8vw, 4.5rem);
-      font-weight: 800;
-      letter-spacing: -0.04em;
-      line-height: 1.1;
+      font-size: clamp(3rem, 8vw, 5.5rem);
+      font-weight: 700;
+      letter-spacing: -0.05em;
+      line-height: 1;
       margin-bottom: 24px;
-      background: linear-gradient(to bottom, #fff 40%, var(--text-muted));
+      background: linear-gradient(180deg, #fff 0%, rgba(255, 255, 255, 0.5) 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
 
     .subtitle {
       color: var(--text-muted);
-      font-size: 1.15rem;
-      max-width: 600px;
-      margin: 0 auto;
+      font-size: 1.125rem;
+      max-width: 580px;
+      margin: 0 auto 40px;
       line-height: 1.6;
     }
 
-    /* --- 5. SEARCH (SaaS Style) --- */
-    .search-wrapper {
-      background: var(--bg-card);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 12px 20px;
+    .hero-cta {
       display: flex;
-      align-items: center;
-      max-width: 500px;
-      margin: 0 auto 80px;
-      box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
+      gap: 16px;
+      justify-content: center;
     }
 
-    .search-input {
-      background: transparent;
-      border: none;
-      color: #fff;
-      outline: none;
-      width: 100%;
-      margin-left: 12px;
-      font-size: 1rem;
-    }
-
-    /* --- 6. CARDS (Glassmorphism) --- */
+    /* --- 6. CARDS GRID --- */
     .grid-container {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 20px;
+      gap: 24px;
+      margin-bottom: 100px;
     }
 
     .card {
-      background: linear-gradient(145deg, rgba(15, 23, 42, 0.6), rgba(15, 23, 42, 0.3));
+      background: var(--bg-card);
       border: 1px solid var(--card-border);
-      border-radius: 24px;
+      border-radius: 16px;
       padding: 32px;
       text-decoration: none;
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      transition: all 0.3s ease;
       position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-        content: "";
-        position: absolute;
-        top: 0; left: 0; right: 0; bottom: 0;
-        background: radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent 70%);
-        opacity: 0;
-        transition: opacity 0.3s;
     }
 
     .card:hover {
-      border-color: var(--accent-blue);
-      transform: translateY(-5px);
-      box-shadow: 0 20px 40px -15px rgba(0,0,0,0.5);
+      border-color: var(--card-border-hover);
+      background: rgba(255, 255, 255, 0.02);
     }
 
-    .card:hover::before {
-        opacity: 1;
+    .card-icon {
+      height: 40px;
+      width: 40px;
+      border-radius: 10px;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 20px;
+      color: #fff;
+      font-size: 1.25rem;
     }
 
     .card h3 { 
       color: #fff; 
       margin: 0 0 12px 0; 
-      font-size: 1.25rem; 
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    
-    .card h3::after {
-        content: "\eb8f"; /* Remix Icon arrow */
-        font-family: 'remixicon';
-        font-size: 1rem;
-        color: var(--accent-blue);
-        opacity: 0;
-        transform: translateX(-10px);
-        transition: all 0.3s;
+      font-size: 1.125rem; 
+      font-weight: 600;
+      letter-spacing: -0.02em;
     }
 
-    .card:hover h3::after {
-        opacity: 1;
-        transform: translateX(0);
+    .card p { 
+      color: var(--text-muted); 
+      font-size: 0.95rem; 
+      line-height: 1.6; 
     }
 
-    .card p { color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; }
+    /* --- NEW BRAND SECTION --- */
+    .brand-section {
+        background-color: var(--brand-bg);
+        padding: 40px 0;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 12px;
+        color: var(--text-main);
+    }
+
+    .brand-section i {
+        font-size: 2rem;
+        color: var(--text-main);
+    }
+
+    .brand-section span {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
 
     /* --- 7. FOOTER --- */
     footer {
-      margin-top: 100px;
-      padding: 60px 20px;
+      padding: 40px 24px;
       border-top: 1px solid var(--card-border);
       text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
     }
 
     .footer-email {
-      color: var(--accent-blue);
+      color: var(--text-main);
       text-decoration: none;
-      font-weight: 500;
+      font-size: 0.875rem;
+      transition: color 0.2s;
     }
 
-    .hidden { display: none !important; }
+    .footer-email:hover {
+      color: var(--text-muted);
+    }
 
   </style>
 </head>
@@ -251,8 +302,11 @@
     <div class="nav-container">
       <a href="index.html" class="nav-logo">UC<span>.</span></a>
       <div class="nav-actions">
-        <a href="index.html" class="btn btn-ghost">Home</a>
-        <a href="dashboard.html" class="btn btn-ghost">Dashboard</a>
+        <div class="nav-links hidden-mobile">
+          <a href="#">Features</a>
+          <a href="#">Research</a>
+          <a href="#">Pricing</a>
+        </div>
         <a href="signin.html" class="btn btn-primary">Sign In</a>
       </div>
     </div>
@@ -260,48 +314,49 @@
 
   <div class="main-content">
     <header>
+      <div class="hero-badge">
+        <i class="ri-sparkling-line"></i> Introducing AI Matcher v2.0
+      </div>
       <h1>Global Research <br>Made Simple.</h1>
-      <p class="subtitle">Join the circle of elite undergraduates accessing world-class scholarships and research stipends.</p>
+      <p class="subtitle">Join the circle of elite undergraduates accessing world-class scholarships, labs, and research stipends.</p>
+      
+      <div class="hero-cta">
+        <a href="dashboard.html" class="btn btn-primary">
+          Start Exploring
+        </a>
+        <a href="#features" class="btn btn-outline">
+          <i class="ri-search-line"></i> Browse Opportunities
+        </a>
+      </div>
     </header>
 
-    <div class="search-wrapper">
-      <i class="ri-search-2-line" style="color: var(--accent-blue); font-size: 1.2rem;"></i>
-      <input type="text" id="searchInput" class="search-input" placeholder="Search opportunities..." autocomplete="off">
-    </div>
-
-    <div class="grid-container" id="cardsGrid">
-      <a href="scholarships.html" class="card searchable-card">
+    <div class="grid-container" id="features">
+      <a href="scholarships.html" class="card">
+        <div class="card-icon"><i class="ri-graduation-cap-line"></i></div>
         <h3>Scholarships</h3>
         <p>Unlock fully-funded international programs and monthly stipends designed for high-achievers.</p>
       </a>
-      <a href="research.html" class="card searchable-card">
+      <a href="research.html" class="card">
+        <div class="card-icon"><i class="ri-microscope-line"></i></div>
         <h3>Research Labs</h3>
         <p>Direct access to Principal Investigators at Ivy League and global institutions for summer cycles.</p>
       </a>
-      <a href="ai-check.html" class="card searchable-card">
+      <a href="ai-check.html" class="card">
+        <div class="card-icon"><i class="ri-robot-2-line"></i></div>
         <h3>AI Matcher</h3>
         <p>Our proprietary algorithm analyzes your CV against historical acceptance data for instant feedback.</p>
       </a>
     </div>
-
-    <footer>
-      <p style="color: var(--text-muted); margin-bottom: 8px;">Built by Simra Faisal</p>
-      <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
-    </footer>
   </div>
 
-  <script>
-    const searchInput = document.getElementById('searchInput');
-    const cards = document.querySelectorAll('.searchable-card');
+  <div class="brand-section">
+    <i class="ri-circle-fill"></i> <span>Undergrad Circle</span>
+  </div>
 
-    searchInput.addEventListener('input', (e) => {
-      const term = e.target.value.toLowerCase();
-      cards.forEach(card => {
-        const text = card.innerText.toLowerCase();
-        card.classList.toggle('hidden', !text.includes(term));
-      });
-    });
-  </script>
+  <footer>
+    <p style="color: var(--text-muted); font-size: 0.875rem;">© 2026 The Undergrad Circle. Built by Simra Faisal.</p>
+    <a href="mailto:undergradcircle@gmail.com" class="footer-email">undergradcircle@gmail.com</a>
+  </footer>
 
 </body>
 </html>
