@@ -13,15 +13,13 @@
   <style>
     /* --- 1. CORE VARIABLES --- */
     :root {
-      --bg-color: #030711;
-      --card-bg: rgba(255, 255, 255, 0.03);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --card-hover-border: rgba(255, 255, 255, 0.2);
+      --bg-color: #000000; /* Pure black like Simulatr */
+      --card-bg: rgba(20, 20, 20, 0.6);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --accent: #ffffff; /* Shifted to white/minimalist accent */
       --text-main: #ffffff;
-      --text-muted: #94a3b8;
-      --accent: #38bdf8;
-      --accent-glow: rgba(56, 189, 248, 0.3);
-      --urgent: #f43f5e;
+      --text-muted: #a1a1aa;
+      --highlight: #38bdf8;
     }
 
     /* --- 2. BASE RESET --- */
@@ -29,361 +27,247 @@
       background-color: var(--bg-color);
       font-family: 'Plus Jakarta Sans', sans-serif;
       color: var(--text-main);
+      margin: 0;
       display: flex;
       flex-direction: column;
       align-items: center;
       min-height: 100vh;
-      margin: 0;
       overflow-x: hidden;
     }
 
     /* --- 3. DYNAMIC BACKGROUND --- */
-    .bg-gradient {
+    .bg-mesh {
       position: fixed;
       top: 0; left: 0; width: 100%; height: 100%;
       z-index: -1;
       background: 
-        radial-gradient(circle at 15% 50%, rgba(56, 189, 248, 0.08) 0%, transparent 50%),
-        radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 50%);
-      animation: breathe 10s infinite alternate;
-    }
-    @keyframes breathe {
-      0% { transform: scale(1); opacity: 0.8; }
-      100% { transform: scale(1.1); opacity: 1; }
+        radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(139, 92, 246, 0.05) 0%, transparent 40%);
     }
 
-    /* --- 4. HEADER & LOGO --- */
+    /* --- 4. HEADER --- */
     .main-content {
       width: 100%;
-      max-width: 1200px;
-      padding: 60px 20px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
+      max-width: 1000px;
+      padding: 80px 24px;
     }
 
-    .brand-container {
-      display: flex;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 20px;
+    header {
+      text-align: center;
+      margin-bottom: 80px;
       opacity: 0;
-      animation: fadeUp 0.8s ease-out forwards;
-    }
-
-    /* The SVG Logo Styles */
-    .logo-svg {
-      width: 48px;
-      height: 48px;
-      fill: none;
-      stroke: var(--accent);
-      stroke-width: 2;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-      filter: drop-shadow(0 0 10px var(--accent-glow));
+      animation: fadeIn 1s ease forwards;
     }
 
     h1 {
-      font-size: 3.5rem;
+      font-size: clamp(2.5rem, 8vw, 4rem);
       font-weight: 800;
-      letter-spacing: -0.03em;
-      margin: 0;
-      background: linear-gradient(180deg, #fff 0%, #94a3b8 100%);
+      letter-spacing: -0.04em;
+      margin-bottom: 16px;
+      background: linear-gradient(to bottom, #fff 40%, #666 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-align: center;
     }
 
-    /* --- 5. STATS TICKER --- */
-    .stats-bar {
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* --- 5. SEARCH (SIMULATR STYLE) --- */
+    .search-container {
+      margin-bottom: 60px;
       display: flex;
-      gap: 40px;
-      margin-bottom: 40px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.2s forwards;
-      flex-wrap: wrap;
       justify-content: center;
     }
-    .stat-item { text-align: center; }
-    .stat-num { font-size: 1.5rem; font-weight: 700; color: var(--accent); }
-    .stat-label { font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; }
 
-    /* --- 6. SEARCH BAR --- */
-    .search-container {
-      position: relative;
+    .search-wrapper {
       width: 100%;
       max-width: 500px;
-      margin-bottom: 60px;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.3s forwards;
-      z-index: 10;
-    }
-    .search-wrapper {
-      display: flex;
-      align-items: center;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid var(--card-border);
-      border-radius: 100px;
-      padding: 12px 20px;
-      backdrop-filter: blur(10px);
+      border-radius: 14px;
+      padding: 14px 20px;
+      display: flex;
+      align-items: center;
       transition: all 0.3s ease;
     }
+
     .search-wrapper:focus-within {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
-      background: rgba(255, 255, 255, 0.05);
-    }
-    .search-input {
-      width: 100%;
-      background: transparent;
-      border: none;
-      color: #fff;
-      font-size: 1rem;
-      margin-left: 10px;
-      outline: none;
+      border-color: rgba(255, 255, 255, 0.4);
+      background: rgba(255, 255, 255, 0.06);
     }
 
-    /* --- 7. CARDS GRID --- */
+    .search-input {
+      background: transparent;
+      border: none;
+      color: white;
+      outline: none;
+      margin-left: 12px;
+      width: 100%;
+      font-size: 1rem;
+    }
+
+    /* --- 6. GRID & CARDS --- */
     .grid-container {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      width: 100%;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
     }
 
     .card {
       position: relative;
-      background-color: var(--card-bg);
+      background: var(--card-bg);
       border: 1px solid var(--card-border);
-      border-radius: 24px;
-      padding: 30px;
+      border-radius: 20px;
+      padding: 32px;
       text-decoration: none;
-      overflow: hidden;
-      transition: all 0.3s ease;
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+      backdrop-filter: blur(12px);
       display: flex;
       flex-direction: column;
-      opacity: 0;
-      animation: fadeUp 0.8s ease-out 0.5s forwards;
+      gap: 15px;
     }
-    
-    /* Mouse Spotlight Logic */
-    .card::before {
-      content: "";
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      border-radius: 24px;
-      background: radial-gradient(
-        800px circle at var(--mouse-x) var(--mouse-y),
-        rgba(255, 255, 255, 0.06),
-        transparent 40%
-      );
-      opacity: 0;
-      transition: opacity 0.5s;
-      z-index: 1;
-      pointer-events: none;
-    }
-    .card:hover::before { opacity: 1; }
-    .card:hover { transform: translateY(-5px); border-color: var(--card-hover-border); }
 
-    /* Card Internals */
-    .card-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 20px; }
-    .icon-box {
-      width: 44px; height: 44px; border-radius: 12px;
+    .card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(255, 255, 255, 0.3);
       background: rgba(255, 255, 255, 0.05);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--accent); font-size: 1.3rem;
-      border: 1px solid rgba(255,255,255,0.05);
-    }
-    
-    /* Urgency Badge */
-    .urgent-badge {
-      display: flex; align-items: center; gap: 6px; font-size: 0.75rem;
-      color: var(--urgent); font-weight: 600;
-      background: rgba(244, 63, 94, 0.1); padding: 4px 10px;
-      border-radius: 20px; border: 1px solid rgba(244, 63, 94, 0.2);
-    }
-    .pulse-dot {
-      width: 6px; height: 6px; background-color: var(--urgent);
-      border-radius: 50%; animation: pulse 1.5s infinite;
-    }
-    @keyframes pulse {
-      0% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0.4); }
-      70% { box-shadow: 0 0 0 6px rgba(244, 63, 94, 0); }
-      100% { box-shadow: 0 0 0 0 rgba(244, 63, 94, 0); }
     }
 
-    .card h3 { margin: 0 0 10px 0; font-size: 1.2rem; color: #fff; z-index: 2; }
-    .card p { margin: 0; font-size: 0.9rem; color: var(--text-muted); line-height: 1.6; z-index: 2; }
-    .card-arrow {
-      margin-top: auto; padding-top: 20px; color: var(--accent);
-      font-weight: 600; font-size: 0.9rem; display: flex; align-items: center;
-      gap: 6px; opacity: 0; transform: translateX(-10px);
-      transition: all 0.3s ease; z-index: 2;
+    .icon-box {
+      font-size: 1.5rem;
+      color: #fff;
+      margin-bottom: 10px;
     }
-    .card:hover .card-arrow { opacity: 1; transform: translateX(0); }
 
-    /* --- 8. CONTACT SECTION --- */
-    .contact-section {
-      margin-top: 80px; width: 100%; text-align: center;
-      padding: 60px 20px; border-top: 1px solid var(--card-border);
-      background: linear-gradient(180deg, rgba(3,7,17,0) 0%, rgba(56, 189, 248, 0.05) 100%);
+    .card h3 {
+      margin: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: #fff;
     }
-    .social-links { display: flex; justify-content: center; gap: 20px; margin-top: 20px; flex-wrap: wrap; }
+
+    .card p {
+      margin: 0;
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    .card-footer {
+      margin-top: auto;
+      font-size: 0.85rem;
+      color: var(--highlight);
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      opacity: 0.7;
+    }
+
+    /* --- 7. FOOTER --- */
+    footer {
+      margin-top: 100px;
+      padding-bottom: 50px;
+      text-align: center;
+      border-top: 1px solid var(--card-border);
+      padding-top: 50px;
+      width: 100%;
+    }
+
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 24px;
+    }
+
     .social-btn {
-      width: 44px; height: 44px; border-radius: 50%;
-      background: var(--card-bg); border: 1px solid var(--card-border);
-      display: flex; align-items: center; justify-content: center;
-      color: var(--text-muted); text-decoration: none;
-      transition: all 0.3s ease; font-size: 1.3rem;
-    }
-    .social-btn:hover {
-      background: var(--accent); color: #fff;
-      transform: translateY(-3px); box-shadow: 0 5px 15px var(--accent-glow);
+      color: var(--text-muted);
+      font-size: 1.4rem;
+      transition: color 0.3s;
     }
 
-    /* Animation Keyframes */
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
+    .social-btn:hover {
+      color: #fff;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
+
     .hidden { display: none !important; }
+
   </style>
 </head>
 <body>
 
-  <div class="bg-gradient"></div>
+  <div class="bg-mesh"></div>
 
   <div class="main-content">
-    
-    <div class="brand-container">
-      <svg class="logo-svg" viewBox="0 0 24 24">
-        <circle cx="12" cy="12" r="10" stroke-width="2"/>
-        <path d="M7 10 L12 15 L17 10" stroke-width="2"/>
-        <path d="M12 7 L12 15" stroke-width="2"/>
-      </svg>
+    <header>
       <h1>The Undergrad Circle</h1>
-    </div>
-
-    <div class="stats-bar">
-      <div class="stat-item">
-        <div class="stat-num">500+</div>
-        <div class="stat-label">Scholarships</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">$2.4M</div>
-        <div class="stat-label">Funding Indexed</div>
-      </div>
-      <div class="stat-item">
-        <div class="stat-num">100%</div>
-        <div class="stat-label">Free Access</div>
-      </div>
-    </div>
+      <p class="subtitle">A curated index of premium opportunities for the next generation of scholars and researchers.</p>
+    </header>
 
     <div class="search-container">
       <div class="search-wrapper">
-        <i class="ri-search-2-line" style="color:var(--text-muted)"></i>
-        <input type="text" id="searchInput" class="search-input" placeholder="Search for opportunities..." autocomplete="off">
+        <i class="ri-search-line"></i>
+        <input type="text" id="searchInput" class="search-input" placeholder="Search opportunities...">
       </div>
     </div>
 
     <div class="grid-container" id="cardsGrid">
       
-      <a href="scholarships.html" class="card searchable-card">
-        <div class="card-header">
-          <div class="icon-box"><i class="ri-graduation-cap-fill"></i></div>
-          <div class="urgent-badge">
-            <div class="pulse-dot"></div> Expires Soon
-          </div>
-        </div>
+      <a href="#" class="card searchable-card">
+        <div class="icon-box"><i class="ri-graduation-cap-line"></i></div>
         <h3>Fully Funded Scholarships</h3>
-        <p>100% tuition coverage including monthly stipends. Updated daily.</p>
-        <div class="card-arrow">Apply Now <i class="ri-arrow-right-line"></i></div>
-      </a>
-      
-      <a href="research.html" class="card searchable-card">
-        <div class="card-header">
-          <div class="icon-box"><i class="ri-microscope-line"></i></div>
-        </div>
-        <h3>Research Programs</h3>
-        <p>Summer cohorts at MIT, Oxford, and Stanford for international students.</p>
-        <div class="card-arrow">View Labs <i class="ri-arrow-right-line"></i></div>
+        <p>Comprehensive coverage including tuition and stipends for global universities.</p>
+        <div class="card-footer">Explore Scholarships <i class="ri-arrow-right-up-line"></i></div>
       </a>
 
-      <a href="ai-check.html" class="card searchable-card" style="border-color: rgba(139, 92, 246, 0.3);">
-        <div class="card-header">
-          <div class="icon-box" style="color: #a78bfa; background: rgba(139, 92, 246, 0.1);">
-            <i class="ri-robot-2-line"></i>
-          </div>
-        </div>
-        <h3>AI Eligibility Matcher</h3>
-        <p>Paste your grades. Our AI calculates your acceptance probability instantly.</p>
-        <div class="card-arrow" style="color:#a78bfa;">Check Fit <i class="ri-arrow-right-line"></i></div>
+      <a href="#" class="card searchable-card">
+        <div class="icon-box"><i class="ri-flask-line"></i></div>
+        <h3>Research Fellowships</h3>
+        <p>Summer research opportunities at Ivy League and Russell Group institutions.</p>
+        <div class="card-footer">View Programs <i class="ri-arrow-right-up-line"></i></div>
       </a>
 
-      <a href="internships.html" class="card searchable-card">
-        <div class="card-header">
-          <div class="icon-box"><i class="ri-briefcase-4-line"></i></div>
-        </div>
-        <h3>Global Internships</h3>
-        <p>Remote and on-site roles with visa sponsorship options.</p>
-        <div class="card-arrow">Find Roles <i class="ri-arrow-right-line"></i></div>
+      <a href="#" class="card searchable-card">
+        <div class="icon-box"><i class="ri-ruler-2-line"></i></div>
+        <h3>AI Matcher</h3>
+        <p>Smart eligibility calculation based on your academic profile and interests.</p>
+        <div class="card-footer">Try Matcher <i class="ri-arrow-right-up-line"></i></div>
       </a>
 
     </div>
 
-    <footer class="contact-section">
-      <div style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 10px;">
-        Designed & Engineered by
-      </div>
-      <h2 style="margin: 0; font-size: 1.5rem; color: #fff;">Simra Faisal</h2>
-      
+    <footer>
+      <p style="font-size: 0.9rem; color: var(--text-muted);">Crafted by Simra Faisal</p>
       <div class="social-links">
-        <a href="mailto:simrafaisal1111@gmail.com" class="social-btn" title="Email Me">
-          <i class="ri-mail-send-line"></i>
-        </a>
-        <a href="https://www.linkedin.com/in/simra-faisal-605781328" target="_blank" class="social-btn" title="LinkedIn">
-          <i class="ri-linkedin-fill"></i>
-        </a>
-        <a href="#" class="social-btn" title="GitHub">
-          <i class="ri-github-fill"></i>
-        </a>
-      </div>
-      
-      <div style="margin-top: 30px; font-size: 0.8rem; color: #475569;">
-        &copy; 2026 The Undergrad Circle. All Rights Reserved.
+        <a href="#" class="social-btn"><i class="ri-linkedin-box-fill"></i></a>
+        <a href="#" class="social-btn"><i class="ri-github-fill"></i></a>
+        <a href="#" class="social-btn"><i class="ri-mail-fill"></i></a>
       </div>
     </footer>
-
   </div>
 
   <script>
-    // 1. SEARCH LOGIC
     const searchInput = document.getElementById('searchInput');
     const cards = document.querySelectorAll('.searchable-card');
 
-    searchInput.addEventListener('keyup', (e) => {
+    searchInput.addEventListener('input', (e) => {
       const term = e.target.value.toLowerCase();
       cards.forEach(card => {
-        const title = card.querySelector('h3').textContent.toLowerCase();
-        const desc = card.querySelector('p').textContent.toLowerCase();
-        card.classList.toggle('hidden', !(title.includes(term) || desc.includes(term)));
+        const text = card.textContent.toLowerCase();
+        card.classList.toggle('hidden', !text.includes(term));
       });
     });
-
-    // 2. MOUSE SPOTLIGHT LOGIC
-    const handleOnMouseMove = e => {
-      const { currentTarget: target } = e;
-      const rect = target.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const y = e.clientY - rect.top;
-      target.style.setProperty("--mouse-x", `${x}px`);
-      target.style.setProperty("--mouse-y", `${y}px`);
-    }
-
-    for (const card of document.querySelectorAll(".card")) {
-      card.onmousemove = e => handleOnMouseMove(e);
-    }
   </script>
-
 </body>
 </html>
