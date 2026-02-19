@@ -31,7 +31,7 @@
       overflow-x: hidden;
     }
 
-    /* --- 3. NAVIGATION --- */
+    /* --- 3. NAVIGATION (Simulatr Style) --- */
     nav {
       height: var(--nav-height);
       width: 100%;
@@ -62,18 +62,17 @@
       background: linear-gradient(to right, #fff, #888);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      text-decoration: none;
     }
 
     .nav-actions {
       display: flex;
-      gap: 12px;
+      gap: 16px;
       align-items: center;
     }
 
     /* PILL BUTTONS */
     .btn {
-      padding: 10px 20px;
+      padding: 10px 22px;
       border-radius: 99px;
       font-size: 0.85rem;
       font-weight: 600;
@@ -86,21 +85,11 @@
 
     .btn-home {
       color: var(--text-muted);
+      border: 1px solid transparent;
     }
 
     .btn-home:hover {
       color: #fff;
-      background: rgba(255, 255, 255, 0.05);
-    }
-
-    /* New Contact Us Style */
-    .btn-contact {
-      color: var(--text-main);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .btn-contact:hover {
-      border-color: rgba(255, 255, 255, 0.4);
       background: rgba(255, 255, 255, 0.05);
     }
 
@@ -232,11 +221,9 @@
 
   <nav>
     <div class="nav-container">
-      <a href="index.html" class="nav-logo">UC</a>
+      <div class="nav-logo">UC</div>
       <div class="nav-actions">
         <a href="index.html" class="btn btn-home">Home</a>
-        <a href="dashboard.html" class="btn btn-home">Dashboard</a>
-        <a href="mailto:undergradcircle@gmail.com" class="btn btn-contact">Contact Us</a>
         <a href="signin.html" class="btn btn-signin">Sign In</a>
       </div>
     </div>
